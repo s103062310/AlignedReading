@@ -1,0 +1,144 @@
+aside {
+	position: fixed;
+	left: 0;
+	right: 80vw;
+	top: 5vh;
+	bottom: 0;
+	flex-flow: column nowrap;
+	background-color: #5C6770;
+	box-shadow: 1px 0 3px rgba(0,0,0,.5);
+	overflow-y: scroll;
+	z-index: 5;
+}
+
+.control-item {
+	display: flex;
+	flex-flow: column nowrap;
+	color: white;
+	text-align: center;
+}
+
+.control-item-title {
+	padding: 1.5vh;
+	font-size: 1.2rem;
+	cursor: pointer;
+	border-bottom: 1px solid #889096;
+}
+
+.control-item-title:hover {
+	background-color: #717B84;
+}
+
+.control-item-content {
+	display: grid;
+	background-color: #717B84;
+	border-bottom: 1px solid #889096;
+}
+
+/* ----- LOAD ----- */
+
+#load > span {
+	padding: 1vh;
+	cursor: pointer;
+}
+
+#load > span:hover {
+	background-color: #889096;
+}
+
+/* ----- SETTING ----- */
+
+.manage-corpus {
+	display: grid;
+	grid-template-columns: 2rem auto 2rem 2rem;
+}
+
+.setting {
+	display: grid;
+	grid-template-columns: 2rem auto 2rem;
+}
+
+.control-item-content > div > * {
+	display: grid!important;
+	align-items: center;
+	padding-top: 1vh;
+}
+
+.control-item-content > div:last-child > * {
+	padding-bottom: 1vh;
+}
+
+.control-item-content > div > *:first-child {
+	padding-left: 1vh;
+	text-align: right;
+}
+
+.control-item-content > div > *:last-child {
+	padding-right: 1vh;
+}
+
+.control-item-content > div > *:nth-child(2) {
+	padding-left: 0.5rem;
+	text-align: left;
+}
+
+/* ----- SEARCH ----- */
+
+#search {
+	padding: 5px;
+	grid-gap: 5px;
+	grid-template-areas: "input input"
+						 "search reset";
+}
+
+/* ----- ICON ----- */
+
+.manage-corpus.target i.fa-eye,
+.manage-corpus i.fa-eye-slash,
+.setting.target i.fa-toggle-on,
+.setting i.fa-toggle-off {
+	display: block;
+}
+
+.manage-corpus i.fa-eye,
+.manage-corpus.target i.fa-eye-slash,
+.setting i.fa-toggle-on,
+.setting.target i.fa-toggle-off {
+	display: none;
+}
+
+/* ----- MY COURPUS LIST ----- */
+
+#my-corpus-list tbody:hover {
+	cursor: pointer;
+}
+
+#my-corpus-list tbody th,
+#my-corpus-list tbody td {
+	vertical-align: middle!important;
+}
+
+#my-corpus-list tr th:first-child,
+#my-corpus-list tr th:last-child,
+#my-corpus-list tr td:first-child,
+#my-corpus-list tr td:last-child {
+	text-align: center;
+}
+
+#my-corpus-list i.fa-square-o {
+	color: #CED1D2;
+}
+
+#my-corpus-list i.fa-check-square {
+	display: none;
+	color: #0275D8;
+}
+
+#my-corpus-list .all i,
+#my-corpus-list .select i.fa-square-o {
+	display: none;
+}
+
+#my-corpus-list .select i.fa-check-square {
+	display: block;
+}

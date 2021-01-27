@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- file charector set -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+	<!-- link information -->
+	<meta property="og:title" content="文本對讀工具"/>
+	<meta property="og:description" content="這是個將數個 DocuXml 中的文件，依照特定的標記或 metadata（如：年代、日期或對讀標記）對齊排列，方便對讀的工具。"/>
+	<meta property="og:image" content="images/cover.jpeg"/>
+
+	<!-- browser tab -->
+	<link rel="icon" href="../../images/logo/icon.png">
+	<title>文本對讀工具</title>	
+
+	<!-- assets -->
+	<script src="../../js/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+	<!-- css file -->
+	<link href="css/body.css" type="text/css" rel="stylesheet">
+	<link href="css/aside.css" type="text/css" rel="stylesheet">
+	<link href="css/main.css" type="text/css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<!-- header -->
+	<header>
+		<span id="menu" class="header-btn">
+			<i class="fa fa-bars" aria-hidden="true"></i>
+			<span class="tooltip-box" style="left: 1vh">
+				<span class="arrow-t" style="left: 1vh"></span>
+				<span class="tooltip-text">選單</span>
+			</span>
+		</span>
+
+		<span id="reset" class="header-btn">
+			<i class="fa fa-refresh" aria-hidden="true"></i>
+			<span class="tooltip-box">
+				<span class="arrow-t" style="left: 2vh"></span>
+				<span class="tooltip-text">清除對讀</span>
+			</span>
+		</span>
+
+		<span class="bold" style="margin-left: 5vh;">文本對讀工具</span>
+
+		<span class="header-btn" data-toggle="modal" data-target="#explain">
+			<i class="fa fa-question-circle" aria-hidden="true"></i>
+			<span class="tooltip-box">
+				<span class="arrow-t" style="left: 2vh"></span>
+				<span class="tooltip-text">使用說明</span>
+			</span>
+		</span>
+
+		<span class="header-btn" onclick="window.open('../../docuTools/userMain/')">
+			<i class="fa fa-cloud" aria-hidden="true"></i>
+			<span class="tooltip-box" style="left: -3vh;">
+				<span class="arrow-t" style="left: 5vh"></span>
+				<span class="tooltip-text">我的資料庫</span>
+			</span>
+		</span>
+
+		<span class="header-btn" onclick="window.open('../../ds-01.home.html')">
+			<i class="fa fa-home" aria-hidden="true"></i>
+			<span class="tooltip-box" style="right: 0;">
+				<span class="arrow-t" style="right: 2vh"></span>
+				<span class="tooltip-text">回首頁</span>
+			</span>
+		</span>
+	</header>
+
+	<!-- control board -->
+	<aside style="display: flex;">
+		<div class="control-item">
+			<div class="control-item-title bold">載入資料</div>
+			<div id="load" class="control-item-content">
+				<input id="upload-xml" type="file" accept=".xml" multiple style="display: none;" />
+				<span id="load-from-local">上傳 XML 檔案</span>
+				<span id="load-from-docusky">從 DocuSky 匯入</span>
+			</div>
+		</div>
+
+		<div class="control-item">
+			<div class="control-item-title bold">文本管理</div>
+			<div id="manage" class="control-item-content"></div>
+		</div>
+
+		<div class="control-item">
+			<div class="control-item-title bold">文件對讀設定</div>
+			<div id="meta-setting" class="control-item-content"></div>
+		</div>
+
+		<div class="control-item">
+			<div class="control-item-title bold">段落對讀設定</div>
+			<div id="align-setting" class="control-item-content"></div>
+		</div>
+
+		<div class="control-item">
+			<div class="control-item-title bold">全文檢索</div>
+			<div id="search" class="control-item-content">
+				<input id="search-query" type="text" class="form-control" style="grid-area: input;">
+				<button id="search-btn" class="btn btn-dark" style="grid-area: search;"><i class="fa fa-search" aria-hidden="true"></i> 檢索</button>
+				<button id="search-reset" class="btn btn-dark" style="grid-area: reset;"><i class="fa fa-refresh" aria-hidden="true"></i> 清除</button>
+			</div>
+		</div>
+	</aside>
+
+	<!-- main -->
+	<main></main>
+
+	<!-- login modal -->
+	<div id="login-ui" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="login-label" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 id="login-label" class="modal-title bold">歡迎使用 DocuSky</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="username" class="col-form-label bold">帳號 (Email)</label>
+						<input id="username" type="email" class="form-control" placeholder="Email">
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-form-label bold">密碼</label>
+						<input id="password" type="password" class="form-control" placeholder="Password"></input>
+					</div>
+				</div>
+				<div class="modal-footer" style="justify-content: space-between;">
+					<button id="opendb-btn" type="button" class="btn btn-info">公開資料庫</button>
+					<button id="login-btn" type="button" class="btn btn-danger">登入</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- corpus list modal -->
+	<div id="my-corpus-list" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="corpus-list-label" aria-hidden="true">
+		<div class="modal-dialog" role="document" style="max-width: 70vw;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 id="corpus-list-label" class="modal-title bold"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body" style="max-height: 75vh; overflow-y: scroll;">
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">資料庫名稱</th>
+								<th scope="col">文獻集名稱</th>
+								<th scope="col">狀態</th>
+								<th scope="col">載入</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+				<div class="modal-footer" style="justify-content: space-between;">
+					<button id="logout-btn" type="button" class="btn btn-secondary">登出</button>
+					<button id="switch-db-btn" type="button" class="btn btn-info" style="margin-right: auto"></button>
+					<button id="load-from-docusky-btn" type="button" class="btn btn-danger">載入</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- explain modal -->
+	<div id="explain" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="explain-label" aria-hidden="true">
+		<div class="modal-dialog" role="document" style="max-width: 90vw;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 id="explain-label" class="modal-title bold">使用說明</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body" style="height: 80vh;"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- js file -->
+	<script src="js/data.js"></script>
+	<script src="js/docusky.js"></script>
+	<script src="js/docuxmlParser.js"></script>
+	<script src="js/ui-content.js"></script>
+	<script src="js/ui-aside.js"></script>
+	<script src="js/ui-main.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+
+</html>

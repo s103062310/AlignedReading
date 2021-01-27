@@ -1,0 +1,507 @@
+<!-- directory -->
+<div class="explain-dir">
+	<div class="explain-dir-item bold" data-key="1">一、工具介紹</div>
+
+	<div class="explain-dir-item bold" data-key="2">二、文本製作</div>
+	<div class="explain-dir-item" data-key="2-1">└ 2-1 Align-Tag</div>
+	<div class="explain-dir-item" data-key="2-1-1">　└ 2-1-1 RefId 設定</div>
+	<div class="explain-dir-item" data-key="2-1-2">　└ 2-1-2 重疊性</div>
+	<div class="explain-dir-item" data-key="2-2">└ 2-2 MARKUS</div>
+	<div class="explain-dir-item" data-key="2-3">└ 2-3 DEDU</div>
+
+	<div class="explain-dir-item bold" data-key="3">三、介面介紹</div>
+	<div class="explain-dir-item" data-key="3-1">└ 3-1 標頭工具列</div>
+	<div class="explain-dir-item" data-key="3-2">└ 3-2 功能選單</div>
+	<div class="explain-dir-item" data-key="3-2-1">　└ 3-2-1 載入資料</div>
+	<div class="explain-dir-item" data-key="3-2-2">　└ 3-2-2 文本管理</div>
+	<div class="explain-dir-item" data-key="3-2-3">　└ 3-2-3 文件對讀設定</div>
+	<div class="explain-dir-item" data-key="3-2-4">　└ 3-2-4 段落對讀設定</div>
+	<div class="explain-dir-item" data-key="3-2-5">　└ 3-2-5 全文檢索</div>
+	<div class="explain-dir-item" data-key="3-3">└ 3-3 文本顯示區</div>
+	<div class="explain-dir-item" data-key="3-3-1">　└ 3-3-1 標題區塊</div>
+	<div class="explain-dir-item" data-key="3-3-2">　└ 3-3-2 詮釋資料區塊</div>
+	<div class="explain-dir-item" data-key="3-3-3">　└ 3-3-3 內文區塊</div>
+
+	<div class="explain-dir-item bold" data-key="4">四、對讀</div>
+
+	<div class="explain-dir-item bold" data-key="5">五、檢索</div>
+	<div class="explain-dir-item" data-key="5-1">└ 5-1 目錄</div>
+	<div class="explain-dir-item" data-key="5-2">└ 5-2 統計數據</div>
+	<div class="explain-dir-item" data-key="5-3">└ 5-3 返回對讀</div>
+</div>
+
+<!-- content -->
+<div class="explain-content">
+
+	<!-- 1 -->
+	<h4 class="bold" data-key="1">一、工具介紹</h4>
+	<hr>
+
+	<div class="explain-section">
+		<div class="multi-col">
+			<div>
+				<p>在人文研究上，舉凡歷史、文學、宗教，均不乏<b>對文本交叉閱讀</b>的需求，我們稱此舉動為<b style="color: indianred;">「對讀」</b>。透過資訊技術，可以將不同文本並排在同個頁面、點選以快速檢視相應段落，來達到降低紙本對讀繁瑣性的目的。本工具提供了兩種文本間對讀的功能：</p>
+				<ul>
+					<li><b>文件間的對讀：</b>使用文件附帶的詮釋資料 (Metadata) 作為對照依據來連結多份文件。</li>
+					<li><b>段落間的對讀：</b>將使用者在文件內容中標註的相應段落連結起來。</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- 2 -->
+	<h4 class="bold" data-key="2">二、文本製作</h4>
+	<hr>
+
+	<div class="explain-section">
+		<div class="multi-col">
+			<div>
+				<p>本工具為 DocuSky 針對對讀需求所開發。在提供的兩種對讀模式中，使用詮釋資料 (Metadata) 對應的<b>文件間對讀</b>不用另外標註，一般 DocuSky 建庫檔即可使用。因應內文中需要較細緻的<b>段落間對讀</b>的需求，我們制訂了新的 DocuXML 標記 ── Align-Tag，需先標註欲對讀的相應段落方能使用。除了直接編輯 XML 外，目前也可以使用 <b>MARKUS</b> 與 <b>DEDU</b> 進行對讀文本的製作，此章節將詳述標註格式與文本的製作流程。</p>
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="2-1">
+			<div>
+				<h5>2-1 Align-Tag</h5>
+				<p>一個 Tag 由 <code>&lt;AlignBegin&gt;</code> 與 <code>&lt;AlignEnd&gt;</code> 組成，格式與包含的屬性如下：</p>
+				<ul>
+					<li><b>Key：</b><b style="color: indianred;">必填</b>，在一份文件內文中唯一的識別碼，用來進行 <code>&lt;AlignBegin&gt;</code> 與 <code>&lt;AlignEnd&gt;</code> 的配對。</li>
+					<li><b>Type：</b><b style="color: indianred;">必填</b>，標註的名稱，表示同一批以相同標準進行的標註。</li>
+					<li><b>RefId：</b>選填，與其他段落「對」在一起的關鍵，用來識別對應關係。</li>
+					<li><b>Term：</b>選填，段落的簡短描述、標籤。</li>
+				</ul>
+				<div class="notice" style="font-family: SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace; padding: 1rem 2rem;">
+					&lt;<font style="color: mediumvioletred;">AlignBegin</font> <font style="color: limegreen;">Key</font>=<font style="color: goldenrod;">"xxx"</font> <font style="color: limegreen;">Type</font>=<font style="color: goldenrod;">"yyy"</font> <font style="color: limegreen;">RefId</font>=<font style="color: goldenrod;">"zzz"</font> <font style="color: limegreen;">Term</font>=<font style="color: goldenrod;">"uuu"</font>/&gt;<br>
+					...... 段落內文 ......<br>
+					&lt;<font style="color: mediumvioletred;">AlignEnd</font> <font style="color: limegreen;">Key</font>=<font style="color: goldenrod;">"xxx"</font>/&gt;
+				</div>
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="2-1-1">
+			<div>
+				<h6><b>2-1-1 RefId 設定</b></h6>
+				<p>段落對讀的形式有兩種，根據 RefId 的設定有不同的對讀效果：</p>
+				<ul>
+					<li><b>錨點對讀：</b>每個對讀段落可以有一個以上的錨點 (RefId)，ID 之間以空白區隔，並以字串比對來找出所有包含相同 ID 的段落。</li>
+					<li><b>範圍對讀：</b>ID 的填寫格式為 <code>[x,y]</code>，在中括號內填寫表示範圍的兩個數字，並以半形逗號區隔數字。對讀時會在 ID 所提供的範圍內搜索，對讀所有重疊到的目標。</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="2-1-2">
+			<div>
+				<h6><b>2-1-2 重疊性</b></h6>
+				<p>將 Align-Tag 設計成由兩個 Tag 組成，可以有效解決標記重疊的問題，重疊的部分將會形成一個獨立的對讀段落，其屬性值 (RefId、Term) 包含所有原段落的值。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="100%" src="images/2-1-2.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="2-2">
+			<div>
+				<h5>2-2 MARKUS</h5>
+			</div>
+
+			<div class="text-center">
+				<img width="100%" src="images/2-2.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 1</b></h6>
+				<p>準備好要對讀的文本純文字檔 (.txt)。</p>
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 2</b></h6>
+				<p>開啟 <a href="https://dh.chinese-empires.eu/markus/beta/" target="_blank">MARKUS</a> 頁面，<b style="color: indianred;">登入帳號</b>後上傳文件。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/2-2-2.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 3</b></h6>
+				<p>選擇<b>「2.b 自訂標籤」</b>。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/2-2-3.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 4</b></h6>
+				<p>新增自訂標籤。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/2-2-4.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" style="grid-template-columns: 1fr 1fr;">
+			<div>
+				<h6><b>Step 5</b></h6>
+				<p>標籤取名需有<b style="color: indianred;">「Align.」</b>的前綴。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/2-2-5.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 6</b></h6>
+				<p>開始標註段落，並填寫 ID。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/2-2-6.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 7</b></h6>
+				<p>標註完畢後匯出 <b style="color: indianred;">MARKUS file (.html)</b>。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/2-2-7.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 8</b></h6>
+				<p>使用 DocuSky 平台上的 <a href="../../docuTools/MarkusConverter/Markus2DocuXml.html" target="_blank">MARKUS to DocuSky Converter</a> 轉換成 DocuXML 格式。</p>
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 9</b></h6>
+				<p>可以從以下方法開始使用對讀工具：</p>
+				<ul>
+					<li>將上一步製作的 .xml 檔載入到工具中。</li>
+					<li>建庫到 <a href="../../docuTools/userMain/" target="_blank">DocuSky</a> 平台上後，匯入工具中。</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="2-3">
+			<div>
+				<h5>2-3 DEDU</h5>
+			</div>
+
+			<div class="text-center">
+				<img width="100%" src="images/2-3.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 1</b></h6>
+				<p>準備好要對讀的文本（任何形式）。</p>
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 2</b></h6>
+				<p>開啟 <a href="https://dedu.dila.edu.tw/home/" target="_blank">DEDU</a> 頁面。需註冊帳號，已有帳號者，按<b>「開始製作」</b>登入；尚無帳號者，使用<b>右上連結申請</b>。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/2-3-2.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 3</b></h6>
+				<p>進入 DEDU 主控台後，點選<b>「專案管理」</b>進到專案列表，<b>「新增專案」</b>。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/2-3-3.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 4</b></h6>
+				<p>選擇第一項<b>「直接使用產生器建立專案」</b>，接著填寫專案資訊。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/2-3-4.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 5</b></h6>
+				<p>編輯對讀文本，將要對讀的文字依序貼到區塊中，一個區塊為一份文件。完成後點選<b>「預覽成果」</b>。</p>
+				<ul class="notice">
+					<li>詳細操作請參閱 <a>DEDU 對讀文獻系統操作說明</a>。</li>
+				</ul>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/2-3-5.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col">
+			<div>
+				<h6><b>Step 6</b></h6>
+				<p><b>「匯出 DocuXML」</b>，或者<b>「傳送到 DocuSky」</b> 上，接著就能將資料匯入工具中，開始使用對讀功能。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/2-3-6.jpeg">
+			</div>
+		</div>
+	</div>
+
+	<!-- 3 -->
+	<h4 class="bold" data-key="3">三、介面介紹</h4>
+	<hr>
+
+	<div class="explain-section">
+		<div class="multi-col" style="grid-template-columns: 1fr 2fr;">
+			<div>
+				<p>介面大致分成三個區塊：</p>
+				<ol>
+					<li><b>標頭工具列。</b></li>
+					<li><b>功能選單。</b></li>
+					<li><b>文本顯示區。</b></li>
+				</ol>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/3.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="3-1">
+			<div>
+				<h5>3-1 標頭工具列</h5>
+				<p>由左至右包含以下內容：</p>
+				<ol>
+					<li><b>選單按鈕 <i class="fa fa-bars" aria-hidden="true"></i>：</b>隱藏/顯示 功能選單。</li>
+					<li><b>清除按鈕 <i class="fa fa-refresh" aria-hidden="true"></i>：</b>還原介面至未對讀前的狀態。</li>
+					<li><b>工具名稱：</b>文本對讀工具。</li>
+					<li><b>說明按鈕 <i class="fa fa-question-circle" aria-hidden="true"></i>：</b>顯示本說明。</li>
+					<li><b>資料庫按鈕 <i class="fa fa-cloud" aria-hidden="true"></i>：</b>回到 DocuSky 個人雲端資料庫頁面。</li>
+					<li><b>首頁按鈕 <i class="fa fa-home" aria-hidden="true"></i>：</b>回到 DocuSky 首頁。</li>
+				</ol>
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="3-2">
+			<div>
+				<h5>3-2 功能選單</h5>
+				<p>收納本工具的功能與其設定，包含資料的載入與管理、對讀的設定、全文檢索，可收合讓介面更單純。</p>
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="3-2-1" style="grid-template-columns: 2fr 1fr;">
+			<div>
+				<h6><b>3-2-1 載入資料</b></h6>
+				<p>本工具提供兩種資料載入方式：</p>
+				<ol>
+					<li><b>從本地端上傳 XML 檔案</b>。</li>
+					<li><b>從 DocuSky 匯入資料庫</b>。</li>
+				</ol>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/3-2-1.jpeg">
+			</div>
+		</div>	
+
+		<div class="multi-col" data-key="3-2-2" style="grid-template-columns: 2fr 1fr;">
+			<div>
+				<h6><b>3-2-2 文本管理</b></h6>
+				<p>列出所有已載入工具的文獻集 (corpus)，可對載入的文本做以下動作：</p>
+				<ol>
+					<li><b>顯示按鈕 <i class="fa fa-eye" aria-hidden="true"></i> / <i class="fa fa-eye-slash" aria-hidden="true"></i> ：</b>顯示/隱藏 該文本。</li>
+					<li><b>刪除按鈕 <i class="fa fa-trash" aria-hidden="true"></i> ：</b>刪除該文本。</li>
+				</ol>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/3-2-2.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="3-2-3" style="grid-template-columns: 2fr 1fr;">
+			<div>
+				<h6><b>3-2-3 文件對讀設定</b></h6>
+				<p>列出所有詮釋資料 (Metadata)，並以 <i class="fa fa-toggle-on" aria-hidden="true"></i> 圖示標示出目前被選定為文件間對讀依據的詮釋資料，點按 <i class="fa fa-toggle-off" aria-hidden="true"></i> 圖示則可以切換被選擇的詮釋資料。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/3-2-3.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="3-2-4" style="grid-template-columns: 2fr 1fr;">
+			<div>
+				<h6><b>3-2-4 段落對讀設定</b></h6>
+				<p>列出所有對讀標註 (Align Type)，並以 <i class="fa fa-toggle-on" aria-hidden="true"></i> 圖示標示出目前被選定為段落間對讀依據的 Type，點按 <i class="fa fa-toggle-off" aria-hidden="true"></i> 圖示則可以切換被選擇的 Type。每個文獻集都有一個預設的 Align Type - FullText，為去掉 <span class="link" data-to="2-1">Align-Tag</span> 的純文本。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/3-2-4.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="3-2-5" style="grid-template-columns: 2fr 1fr;">
+			<div>
+				<h6><b>3-2-5 全文檢索</b></h6>
+				<p>在文字框中輸入檢索詞後，點按<b>「檢索」</b>進入搜尋模式、進行全文檢索詞搜尋並顯示結果；點按<b>「清除」</b>回到原本的對讀模式。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/3-2-5.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="3-3" style="grid-template-columns: 1fr 1fr;">
+			<div>
+				<h5>3-3 文本顯示區</h5>
+				<p>本工具以文獻集 (corpus) 為單位，一份文獻集顯示為一獨立直欄，並包含以下內容：</p>
+				<ol>
+					<li><b>文本標題：</b>顯示文獻集名稱，右側 <i class="fa fa-folder-open" aria-hidden="true"></i> / <i class="fa fa-folder" aria-hidden="true"></i> 圖示可以 打開/關閉 文獻集的文件目錄。</li>
+					<li><b>文本目錄：</b>列出所有文件名稱，點選任一文件可以跳轉至該文件所在處。</li>
+					<li><b>文本內容：</b>顯示每份文件，包含標題、詮釋資料、內文三種類型的區塊。</li>
+				</ol>
+				<ul class="notice">
+					<li>本工具沒有設定文獻集數量上限，但匯入資料量過大可能導致瀏覽器無法良好負荷，請衡量文本大小並匯入適當數量的文本。</li>
+				</ul>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/3-3.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="3-3-1" style="grid-template-columns: 1fr 1fr;">
+			<div>
+				<h6><b>3-3-1 標題區塊</b></h6>
+				<p>顯示文件檔名，以標示一份文件的開始。鼠標滑過會顯示目前文件間對讀依據的值 (Metadata Value)，點擊可觸發以下功能：</p>
+				<ul>
+					<li><b>右側 <i class="fa fa-angle-double-down" aria-hidden="true"></i> / <i class="fa fa-angle-double-up" aria-hidden="true"></i> 圖示：</b>打開/關閉 本文件的詮釋資料區塊。</li>
+					<li><b>區塊其餘部分：</b><span class="link" data-to="4">文件間對讀</span>。</li>
+				</ul>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/3-3-1.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="3-3-2" style="grid-template-columns: 1fr 1fr;">
+			<div>
+				<h6><b>3-3-2 詮釋資料區塊</b></h6>
+				<p>顯示文件所有的詮釋資料。其中以黃底標示者，是目前被選定為對讀依據的詮釋資料。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/3-3-2.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="3-3-3" style="grid-template-columns: 1fr 1fr;">
+			<div>
+				<h6><b>3-3-3 內文區塊</b></h6>
+				<p>根據使用者標註的 <span class="link" data-to="2-1">Align-Tag</span> 將內文切割成多段顯示，若有標註 Term 值會額外以標籤形式顯示。鼠標滑過會顯示該段落對讀所依據的值 (RefId)，點擊可觸發<span class="link" data-to="4">段落間對讀</span>。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/3-3-3.jpeg">
+			</div>
+		</div>		
+	</div>
+
+	<!-- 4 -->
+	<h4 class="bold" data-key="4">四、對讀</h4>
+	<hr>
+
+	<div class="explain-section">
+		<div class="multi-col">
+			<div>
+				<p>對讀採多對多的模式，標題區塊觸發文件間對讀，內文區塊觸發段落間對讀。區塊共有三種顏色，附帶各自的功能，分述於下：</p>
+				<ul>
+					<li><b style="color: royalblue;">藍色：</b>預設區塊，沒有對到的區塊，點按觸發新一輪的對讀。</li>
+					<li><b style="color: limegreen;">綠色：</b>對讀的目標區塊，點按該區塊將使其成為閱讀目標 (紅色)。</li>
+					<li><b style="color: indianred;">紅色：</b>正在閱讀的區塊，點按該區塊將尋找其他文本的下一個閱讀目標。</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- 5 -->
+	<h4 class="bold" data-key="5">五、檢索</h4>
+	<hr>
+
+	<div class="explain-section">
+		<div class="multi-col">
+			<div>
+				<p>透過全文檢索進到搜尋模式後，原本的文本顯示區將呈現檢索結果，包含顯示於文本標題的總檢索詞數量、含檢索詞的所有段落區塊、檢索詞的醒目標示。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/5.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="5-1" style="grid-template-columns: 1fr 1fr;">
+			<div>
+				<h5>5-1 目錄</h5>
+				<p>列出所有包含檢索詞的文件檔名，與其內包含的檢索詞數量，點按任一文件可以跳轉至該文件所在處。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/5-1.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="5-2" style="grid-template-columns: 1fr 1fr;">
+			<div>
+				<h5>5-2 統計數據</h5>
+				<p>原本的詮釋資料區塊用作顯示每份文件的檢索統計數據，包含文件的檢索詞數量、含檢索詞的段落數量。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/5-2.jpeg">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="5-3">
+			<div>
+				<h5>5-3 返回對讀</h5>
+				<p>點按段落區塊，將跳轉至該段落在對讀模式中對讀的狀況。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/5-3.jpeg">
+			</div>
+		</div>
+	</div>
+</div>

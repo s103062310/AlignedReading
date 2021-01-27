@@ -1,0 +1,180 @@
+@font-face {
+	font-family: apple-2;
+	src: url("../assets/apple-zh-2.eot"),
+		 url("../assets/apple-zh-2.woff") format("woff"),
+		 url("../assets/apple-zh-2.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: apple-3;
+	src: url("../assets/apple-zh-3.eot"),
+		 url("../assets/apple-zh-3.woff") format("woff"),
+		 url("../assets/apple-zh-3.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: apple-2!important;
+	word-break: break-all;
+}
+
+.bold {
+	font-family: apple-3;
+}
+
+i,
+#search i:hover,
+#explain i:hover {
+	font-size: 1rem!important;
+	text-indent: 0;
+	cursor: default;
+}
+
+#explain i {
+	display: inline-block;
+}
+
+i:hover {
+	font-size: 1.3rem!important;
+	cursor: pointer;
+}
+
+p {
+	margin: 1rem;
+	margin-top: 1rem!important;
+	text-indent: 2rem;
+}
+
+h5, h6 {
+	font-family: apple-3!important;
+	text-indent: 1rem;
+}
+
+/* ----- HEADER ----- */
+
+header {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 5vh;
+	display: grid!important;
+	grid-template-columns: 5vh 5vh auto 5vh 5vh 5vh;
+	color: white;
+	background-color: #49525A;
+	box-shadow: 0 1px 3px rgba(0,0,0,.5);
+	font-size: 3vh;
+	text-align: center;
+	z-index: 10;
+}
+
+header span {
+	height: 100%;
+	position: relative;
+	display: grid;
+	align-items: center;
+}
+
+.header-btn:hover {
+	color: #49525A;
+	background-color: white;
+	cursor: pointer;
+}
+
+.header-btn:hover > .tooltip-box {
+	display: block;
+}
+
+.tooltip-box {
+	display: none;
+	position: absolute;
+	top: 6vh;
+	width: max-content;
+	height: max-content;
+	background: rgba(0,0,0,.75);
+	border-radius: 5px;
+}
+
+.tooltip-text {
+	display: grid;
+	margin: 1vh;
+	font-size: 2vh;
+	color: white;
+}
+
+.arrow-t {
+	position: absolute;
+	top: -10px;
+	width: 0px;
+	height: 0px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent transparent rgba(0,0,0,.75) transparent;
+}
+
+/* ----- EXPLAIN ----- */
+
+#explain .modal-body {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	grid-gap: 0.5rem;
+}
+
+.explain-dir {
+	display: flex;
+	flex-direction: column;
+	border-radius: 5px;
+	box-shadow: 1px 0 5px rgba(0,0,0,.5);
+	overflow-y: scroll;
+}
+
+.explain-dir-item {
+	padding: 0.5rem;
+	border-bottom: 1px solid gainsboro;
+}
+
+.explain-dir-item:hover {
+	background-color: #EFF3F7;
+	cursor: pointer;
+}
+
+.explain-content {
+	padding: 1rem;
+	overflow-y: scroll;
+}
+
+.explain-section {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 4rem;
+}
+
+.explain-section >:not(:first-child) {
+	margin-top: 3rem;
+}
+
+.multi-col {
+	display: grid;
+	align-items: center;
+}
+
+.notice {
+	margin: 1rem;
+	padding: 1rem 1rem 1rem 40px;
+	list-style-type: cambodian;
+	background-color: rgba(0,0,0,.05);
+	border-radius: 5px;
+}
+
+.link {
+	color: #007BFF;
+}
+
+.link:hover {
+	color: #0056B3;
+	text-decoration: underline;
+	cursor: pointer;
+}
