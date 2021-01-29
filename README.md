@@ -1,8 +1,9 @@
 # AlignedReading
-[Develop Weekly Progress](https://hackmd.io/@DocuSky/HJdOAaLXN)
-Developed from [MultiLitReading](https://github.com/s103062310/MultiLitReading)
+[Develop Weekly Progress](https://hackmd.io/@DocuSky/HJdOAaLXN)  
+Developed from [MultiLitReading](https://github.com/s103062310/MultiLitReading)  
 
 > 2021.01.27 | v.3.0  
+> 2021.05.19 | v.3.1, fix: bugs & update new links  
 
 ## CSS Files
 1. **body** => for whole UI setting

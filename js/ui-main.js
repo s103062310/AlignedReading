@@ -448,15 +448,15 @@ class Corpus {
 			});
 		}
 
-		console.log('click!');
+		//console.log('click!');
 
 		// jump to read and highlight
 		$.each(this.parent.corpora, function() {
-			console.log(this.name, this.read.para);
+			//console.log(this.name, this.read.para);
 
 			// have aligned
 			if (this.aligned[param.mode].length > 0) {
-				let info = this.read.para.split('>>');
+				let info = (param.mode === 'para') ?this.read.para.split('>>') :[];
 				let filename = (param.mode === 'doc') ?this.read.doc :info[0];
 				let index = (param.mode === 'doc') ?undefined :info[2];
 				this.jumpToBlock(param.mode, filename, index);

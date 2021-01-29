@@ -1,17 +1,17 @@
 @font-face {
 	font-family: apple-2;
-	src: url("../assets/apple-zh-2.eot"),
-		 url("../assets/apple-zh-2.woff") format("woff"),
-		 url("../assets/apple-zh-2.ttf") format("truetype");
+	src: url("../../../fonts/apple/apple-zh-2.eot"),
+		 url("../../../fonts/apple/apple-zh-2.woff") format("woff"),
+		 url("../../../fonts/apple/apple-zh-2.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: apple-3;
-	src: url("../assets/apple-zh-3.eot"),
-		 url("../assets/apple-zh-3.woff") format("woff"),
-		 url("../assets/apple-zh-3.ttf") format("truetype");
+	src: url("../../../fonts/apple/apple-zh-3.eot"),
+		 url("../../../fonts/apple/apple-zh-3.woff") format("woff"),
+		 url("../../../fonts/apple/apple-zh-3.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ThdlPrototypeExport>
+<documents>
+<document filename="CV_Andy">
+<corpus>Andy</corpus>
+<title>CV</title>
+<doc_content>
+<AlignBegin Key="1" Type="Time" RefId="[20080900,20110600]" Term="2008/09-2011/06"/>建國中學<AlignEnd Key="1"/>
+<AlignBegin Key="2" Type="Time" RefId="[20110900,20160600]" Term="2011/09-2016/06"/>台灣大學<AlignEnd Key="2"/>
+<AlignBegin Key="3" Type="Time" RefId="[20160700,20180700]" Term="2016/07-2018/07"/>服兵役<AlignEnd Key="3"/>
+<AlignBegin Key="4" Type="Time" RefId="[20180800,20230400]" Term="2018/08-2023/04"/>電子公司<AlignEnd Key="4"/>
+<AlignBegin Key="5" Type="Time" RefId="[20231000,20351200]" Term="2023/10-2035/12"/>google<AlignEnd Key="5"/>
+</doc_content>
+</document>
+<document filename="CV_Bella">
+<corpus>Bella</corpus>
+<title>CV</title>
+<doc_content>
+<AlignBegin Key="6" Type="Time" RefId="[20110900,20140600]" Term="2011/09-2014/06"/>北一女中<AlignEnd Key="6"/>
+<AlignBegin Key="7" Type="Time" RefId="[20140900,20180600]" Term="2014/09-2018/06"/>清華大學<AlignEnd Key="7"/>
+<AlignBegin Key="8" Type="Time" RefId="[20180700,20200700]" Term="2018/07-2020/07"/>台灣大學<AlignEnd Key="8"/>
+<AlignBegin Key="9" Type="Time" RefId="[20200800,20270100]" Term="2020/08-2027/01"/>facebook<AlignEnd Key="9"/>
+<AlignBegin Key="10" Type="Time" RefId="[20270300,20351200]" Term="2027/03-2035/12"/>google<AlignEnd Key="10"/>
+</doc_content>
+</document>
+</documents>
+</ThdlPrototypeExport>

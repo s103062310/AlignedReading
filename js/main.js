@@ -139,6 +139,16 @@ var _docusky = new DocuSky();		// docusky.js
 var _parser = new DocuxmlParser();	// docuxmlParser.js
 
 
+// google analytics
+if (typeof gtagEventLog == 'function') {
+	gtagEventLog({
+		action: 'view',
+		category: 'tool',
+		label: '文本對讀工具'
+	});
+}
+
+
 // initialize when browser is ready
 $(document).ready(function() {
 
@@ -286,7 +296,7 @@ function getDataFromDocusky(param) {
 	param.callback = processDataFromDocusky;
 	_ui.addCorpus(param.corpus);
 	_docusky.getData(param);
-	console.log('send', param.db + '-' + param.corpus, +new Date());
+	//console.log('send', param.db + '-' + param.corpus, +new Date());
 }
 
 
@@ -297,8 +307,8 @@ function getDataFromDocusky(param) {
 //	- docList: array(object), documents data from docusky
 //	- callback: function, execute after getting all data
 function processDataFromDocusky(param) {
-	console.log('receive', param.db + '-' + param.corpus, +new Date());
+	//console.log('receive', param.db + '-' + param.corpus, +new Date());
 	var data = _parser.processDocuSkyRowData(param.docList);
-	console.log('parse fin', +new Date(),data)
+	//console.log('parse fin', +new Date(),data)
 	_ui.setCorpusData(param.corpus, data);
 }

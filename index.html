@@ -2,6 +2,7 @@
 <html>
 
 <head>
+
 	<!-- file charector set -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
@@ -15,17 +16,23 @@
 	<title>文本對讀工具</title>	
 
 	<!-- assets -->
-	<script src="../../js/jquery.min.js"></script>
+	<script src="../../packages/jquery/v.2.2.4/jquery.min.js"></script>
+	<script src="../../packages/self-defined/docuxml.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
-	<!-- css file -->
-	<link href="css/body.css" type="text/css" rel="stylesheet">
-	<link href="css/aside.css" type="text/css" rel="stylesheet">
-	<link href="css/main.css" type="text/css" rel="stylesheet">
+	<!-- css file -->	
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+	<link href="css/body.css" type="text/css" rel="stylesheet">
+	<link href="css/aside.css" type="text/css" rel="stylesheet">
+	<link href="css/main.css" type="text/css" rel="stylesheet">
+
+	<!-- google analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109249169-1"></script>
+	<script src="../../packages/self-defined/googleAnalytics.js"></script>
+
 </head>
 
 <body>
@@ -175,7 +182,7 @@
 
 	<!-- explain modal -->
 	<div id="explain" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="explain-label" aria-hidden="true">
-		<div class="modal-dialog" role="document" style="max-width: 90vw;">
+		<div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 90vw;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 id="explain-label" class="modal-title bold">使用說明</h5>
@@ -189,7 +196,6 @@
 	<!-- js file -->
 	<script src="js/data.js"></script>
 	<script src="js/docusky.js"></script>
-	<script src="js/docuxmlParser.js"></script>
 	<script src="js/ui-content.js"></script>
 	<script src="js/ui-aside.js"></script>
 	<script src="js/ui-main.js"></script>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<ThdlPrototypeExport>
+<documents>
+<document filename="Diary_Andy">
+<corpus>Andy</corpus>
+<title>2019年</title>
+<doc_content>
+<AlignBegin Type="Time" Key="11" RefId="0712" Term="七月十二日"/>
+<AlignBegin Type="Place" Key="134" RefId="TW" Term="台灣"/>
+早上10:30的飛機飛往阿姆斯特丹。
+<AlignEnd Key="134"/>
+<AlignBegin Type="Place" Key="135" RefId="NL" Term="荷蘭"/>
+經過十個小時後抵達阿姆斯特丹，還是同一天的晚上。
+<AlignEnd Key="11"/>
+<AlignBegin Type="Time" Key="12" RefId="0718" Term="七月十八日"/>
+清晨搭乘長途火車去奧地利。
+<AlignEnd Key="135"/>
+<AlignEnd Key="12"/>
+<AlignBegin Type="Time" Key="13" RefId="0719" Term="七月十九日"/>
+<AlignBegin Type="Place" Key="136" RefId="AT" Term="奧地利"/>
+在火車上睡了一夜，第二天晚上到達音樂之都維也納。
+<AlignEnd Key="13"/>
+<AlignBegin Type="Time" Key="14" RefId="0722" Term="七月二十二日"/>
+從維也納搭乘直達台北的航班回家！
+<AlignEnd Key="136"/>
+<AlignEnd Key="14"/>
+<AlignBegin Type="Time" Key="15" RefId="0723" Term="七月二十三日"/>
+<AlignBegin Type="Place" Key="137" RefId="TW" Term="台灣"/>
+回到台灣。
+<AlignEnd Key="137"/>
+<AlignEnd Key="15"/>
+</doc_content>
+</document>
+<document filename="Diary_Bella">
+<corpus>Bella</corpus>
+<title>2019年</title>
+<doc_content>
+<AlignBegin Type="Time" Key="57" RefId="0701" Term="七月一日"/>
+<AlignBegin Type="Place" Key="226" RefId="NL" Term="荷蘭"/>
+暑假開始，計畫旅遊後回台灣探親。
+<AlignEnd Key="57"/>
+<AlignBegin Type="Time" Key="58" RefId="0712" Term="七月十二日"/>
+搭乘上午的班機到奧地利自助旅遊。
+<AlignEnd Key="226"/>
+<AlignBegin Type="Place" Key="227" RefId="AT" Term="奧地利"/>
+約兩三個小時後抵達。
+<AlignEnd Key="58"/>
+<AlignBegin Type="Time" Key="59" RefId="0719" Term="七月十九日"/>
+決定順便到鄰國捷克觀光。
+<AlignEnd Key="227"/>
+<AlignBegin Type="Place" Key="228" RefId="CZ" Term="捷克"/>
+前一晚夜宿火車，今日清晨即到達。
+<AlignEnd Key="59"/>
+<AlignBegin Type="Time" Key="60" RefId="0723" Term="七月二十三日"/>
+從捷克搭乘飛機回台灣。
+<AlignEnd Key="228"/>
+<AlignEnd Key="60"/>
+<AlignBegin Type="Time" Key="61" RefId="0724" Term="七月二十四日"/>
+<AlignBegin Type="Place" Key="229" RefId="TW" Term="台灣"/>
+抵達台灣。
+<AlignEnd Key="229"/>
+<AlignEnd Key="61"/>
+</doc_content>
+</document>
+</documents>
+</ThdlPrototypeExport>
