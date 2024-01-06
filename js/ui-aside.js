@@ -150,11 +150,12 @@ class CorpusList {
 	// get data of user selected corpus
 	// getDataFunc: function, request data from docusky
 	getSelectedData(getDataFunc) {
+		const target = this.target
 
 		// each selected corpus
 		$(this.tableUI).find('.select').each(function() {
 			getDataFunc({
-				target: this.target,
+				target,
 				db: $(this).find('td[name="db"]').text(),
 				corpus: $(this).find('td[name="corpus"]').text()
 			});

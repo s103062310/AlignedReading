@@ -157,8 +157,7 @@ var _parser = new DocuxmlParser();	// docuxmlParser.js
 const { searchParams } = new URL(location.href)
 const _query = Object.fromEntries([...searchParams.entries()].map(
 	(([key, value]) => {
-		const valueArr = value.split(',')
-		const parsedValue = valueArr.length > 1 ? valueArr : value
+		const parsedValue = key === 'corpus' ? value.split(',') : value
 		return [key, parsedValue]
 	})))
 
