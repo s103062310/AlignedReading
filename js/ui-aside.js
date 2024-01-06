@@ -240,6 +240,7 @@ class Setting {
 	// list: object, record source (which corpus) of each choice item [choice: all sources(array(string: corpus name))]
 	// target: string, user selected item in list
 	constructor(parent, ui) {
+		this.name = ui.split('-')[0].replace('#', '')
 		this.ui = $(ui);
 		this.parent = parent;
 		this.list = {};	
@@ -257,8 +258,10 @@ class Setting {
 			this.list[item].push(corpusname);
 		});
 
-		// default target: first item or selected item
-		this.target = (this.target === undefined) ?Object.keys(this.list)[0] :this.target;
+		if (!this.target) {
+			// default target: url parameter or first item
+			this.target = _query[this.name] || Object.keys(this.list)[0]
+		}
 
 		// refresh
 		this.refresh();

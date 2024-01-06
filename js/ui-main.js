@@ -588,7 +588,7 @@ class Main {
 	// mode: string, record which mode user is, align or search
 	// query: string, cache the search query
 	// corpora: object, record each corpus's controller [corpusname: corpus controller(Corpus)]
-	// target: object, active metadata and aligntype [item: active name(string)]
+	// target: object, active settings [item: active name(string)]
 	constructor() {
 		this.ui = $('main');
 		this.mode = 'align';
@@ -597,6 +597,7 @@ class Main {
 		this.target = {
 			metadata: undefined,
 			aligntype: undefined,
+			titleDisplay: undefined,
 		};
 	}
 
@@ -684,11 +685,15 @@ class Main {
 	// change active title display metadata
 	// titleDisplay: string, name of active title display metadata
 	activateTitleDisplay(titleDisplay) {
+		this.target.titleDisplay = titleDisplay;
+
 		// each corpus
 		Object.values(this.corpora).forEach(corpus => {
+			const data = corpus.documents
 			// each title block
-			Object.values(corpus.contentUI.titleBlocks).forEach(titleBlock => {
-				titleBlock.changeTitle(titleDisplay)
+			Object.entries(corpus.contentUI.titleBlocks).forEach(([filename, titleBlock]) => {
+				const title = titleDisplay === '檔名' ? filename : data[filename].metadata[titleDisplay]
+				titleBlock.changeTitle(title)
 			})
 		})
 	}

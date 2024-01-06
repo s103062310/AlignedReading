@@ -78,6 +78,7 @@ class UI {
 		this.mainUI.setCorpusData(name, data, aligntype, {
 			metadata: this.metaSettingUI.target,
 			aligntype: this.alignSettingUI.target,
+			titleDisplay: this.titleSettingUI.target,
 		});
 	}
 
@@ -152,6 +153,16 @@ var _ui = new UI();
 var _docusky = new DocuSky();		// docusky.js
 var _parser = new DocuxmlParser();	// docuxmlParser.js
 
+// parse url parameter
+const { searchParams } = new URL(location.href)
+const _query = Object.fromEntries([...searchParams.entries()].map(
+	(([key, value]) => {
+		const valueArr = value.split(',')
+		const parsedValue = valueArr.length > 1 ? valueArr : value
+		return [key, parsedValue]
+	})))
+
+
 
 // google analytics
 if (typeof gtagEventLog == 'function') {
@@ -194,6 +205,17 @@ $(document).ready(function() {
 			jumpTo($(event.target).attr('data-to'));
 		});
 	});
+
+	// auto load open db
+	if (_query.db && _query.corpus) {
+		_query.corpus.forEach(corpus => {
+			getDataFromDocusky({
+				target: 'OPEN',
+				db: _query.db,
+				corpus,
+			})
+		})
+	}
 });
 
 
