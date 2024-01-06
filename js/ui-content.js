@@ -45,22 +45,23 @@ class TitleBlock {
 
 	// ui: DOM, UI of title block
 	// parent: class Content, who creates this
-	constructor(parent, filename, alignable, isAlign) {
+	constructor(parent, filename, title, alignable, isAlign) {
 		this.ui = undefined;
 		this.parent = parent;
-		this.init(filename, alignable, isAlign);
+		this.init(filename, title, alignable, isAlign);
 	}
 
 	// initialization
 	// filename: string, name of a document
+	// title: string, title of this block
 	// alignable: bool, if this block can be aligned
 	// isAlign: bool, if this block is target of aligning
-	init(filename, alignable, isAlign) {
+	init(filename, title, alignable, isAlign) {
 		var me = this;
 
 		// html
 		var html = `<div class="title-block${ (alignable) ?' alignable' :'' }${ (isAlign) ?' target': '' }"${ (alignable) ?' data-toggle="tooltip" data-placement="top" data-original-title=""' :''}>
-						<span${ (alignable) ?' class="align-btn"' :'' }>${ filename }</span>
+						<span class="title-text${ (alignable) ?' align-btn' :'' }">${ title }</span>
 						<span class="meta-btn">
 							<i class="fa fa-angle-double-up" aria-hidden="true"></i>
 							<i class="fa fa-angle-double-down" aria-hidden="true"></i>
@@ -75,7 +76,7 @@ class TitleBlock {
 		$(this.ui).find('.align-btn').click(function(event) {
 			me.parent.parent.align({
 				mode: 'doc',
-				filename: filename,
+				filename,
 				clicked: $(event.target).closest('.title-block')
 			});
 		});
@@ -84,6 +85,12 @@ class TitleBlock {
 		$(this.ui).find('.meta-btn').click(function() {
 			me.parent.toggleMeta(filename);
 		});
+	}
+
+	// change displayed title
+	// title: string, title of this block
+	changeTitle(title) {
+		$(this.ui).find('.title-text').html(title)
 	}
 
 	// delete this block
@@ -303,10 +310,10 @@ class Content {
 		this.mode = mode;
 		var me = this;
 		var intf = this.parent.parent.mode;
+		var target = this.parent.parent.target;
 
 		// variables and check align
 		if (intf === 'align') {
-			var target = this.parent.parent.target;
 			var aligntype = (target.aligntype in data.content) ?target.aligntype :'FullText';
 			var blockList = data.content[aligntype];
 			var alignable = true;
@@ -322,8 +329,12 @@ class Content {
 			return;
 		}
 
+		// title
+		const targetTitle = target.titleDisplay
+		const title = targetTitle === '檔名' ? filename : data.metadata[targetTitle]
+
 		// functions
-		var addTitleBlock = function() { me.titleBlocks[filename] = new TitleBlock(me, filename, alignable, isAlign); };
+		var addTitleBlock = function() { me.titleBlocks[filename] = new TitleBlock(me, filename, title, alignable, isAlign); };
 		var addMetaBlock = function() { me.metaBlocks[filename] = new MetaBlock(me, data.metadata, linkMeta, targetMeta); };
 
 		// create file container

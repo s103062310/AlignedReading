@@ -47,27 +47,25 @@ class CorpusList {
 
 	// modalUI: DOM, UI of corpus list modal
 	// tableUI: DOM, UI of corpus table
-	constructor(logoutFunc, switchDBFunc, getDataFunc) {
+	constructor(logoutFunc, loginFunc, switchDBFunc, getDataFunc) {
+		this.target = 'USER'
+		this.isLogin = false
+		this.loginFunc = logoutFunc
+		this.loginFunc = loginFunc
 		this.modalUI = $('#my-corpus-list');
 		this.tableUI = $('#my-corpus-list tbody');
-		this.init(logoutFunc, switchDBFunc, getDataFunc);
+		this.init(switchDBFunc, getDataFunc);
 	}
 
 	// initialization
-	// logoutFunc: function, log out from docusky
 	// switchDBFunc: function, switch database and corpus list to target
 	// getDataFunc: function, get data from docusky after get user selected corpus
-	init(logoutFunc, switchDBFunc, getDataFunc) {
+	init(switchDBFunc, getDataFunc) {
 		var me = this;
 
 		// onclick - select corpus
 		$(this.tableUI).click(function(event) {
 			me.toggleRow(event.target);
-		});
-
-		// onclick - log out
-		$('#logout-btn').click(function() {
-			logoutFunc();
 		});
 
 		// onclick - switch to another database
@@ -91,9 +89,12 @@ class CorpusList {
 	// target: string, which database is loaded, OPEN or USER
 	// corpora: array(object), corpus list from docusky api
 	display(target, corpora) {
-		$(this.tableUI).empty();
-
+		this.target = target
+		const isUserDB = target === 'USER'
+		if (isUserDB) this.isLogin = true
+		
 		// table html
+		$(this.tableUI).empty();
 		corpora.forEach((corpus, i) => {
 			let classname = (corpus.corpus === '[ALL]') ?'all' :'';
 
@@ -111,11 +112,23 @@ class CorpusList {
 		});
 
 		// UI
-		$('#corpus-list-label').html((target === "OPEN") ?'公開資料庫' :'我的資料庫');
-		$('#switch-db-btn').html((target === "USER") ?'公開資料庫' :'我的資料庫');
-		$('#switch-db-btn').attr('data-target', (target === 'USER') ?'OPEN' :'USER');
-		$('#load-from-docusky-btn').attr('data-target', target);
-		this.modal('show');
+		$('#corpus-list-label').html(isUserDB ? '我的資料庫' : '公開資料庫')
+		$('#account-btn').html(this.isLogin ? '登出' : '登入')
+		$('#account-btn').click(this.isLogin ? this.logoutFunc : this.loginFunc)
+		$('#switch-db-btn').html(isUserDB ? '公開資料庫' : '我的資料庫')
+		$('#switch-db-btn').attr('data-target', isUserDB ? 'OPEN' : 'USER')
+		$('#switch-db-btn').css('display', this.isLogin ? 'inline-block' : 'none')
+		this.modal('show')
+	}
+
+	logout() {
+		this.isLogin = false
+		if (this.target === "USER") this.modal('hide')
+		else {
+			$('#account-btn').html('登入')
+			$('#account-btn').click(this.loginFunc)
+			$('#switch-db-btn').css('display', 'none')
+		}
 	}
 
 	// toggle all entry should toggle when click a table entry
@@ -137,11 +150,12 @@ class CorpusList {
 	// get data of user selected corpus
 	// getDataFunc: function, request data from docusky
 	getSelectedData(getDataFunc) {
+		const target = this.target
 
 		// each selected corpus
 		$(this.tableUI).find('.select').each(function() {
 			getDataFunc({
-				target: $('#load-from-docusky-btn').attr('data-target'),
+				target,
 				db: $(this).find('td[name="db"]').text(),
 				corpus: $(this).find('td[name="corpus"]').text()
 			});
@@ -219,7 +233,7 @@ class Manage {
 // * * * * * * * * * * * * * * * * setting * * * * * * * * * * * * * * * * *
 
 
-// controller of setting block (metadata, aligntype)
+// controller of setting block (metadata, aligntype, titledisplay)
 class Setting {
 
 	// ui: DOM, UI of setting block
@@ -227,6 +241,7 @@ class Setting {
 	// list: object, record source (which corpus) of each choice item [choice: all sources(array(string: corpus name))]
 	// target: string, user selected item in list
 	constructor(parent, ui) {
+		this.name = ui.split('-')[0].replace('#', '')
 		this.ui = $(ui);
 		this.parent = parent;
 		this.list = {};	
@@ -244,8 +259,10 @@ class Setting {
 			this.list[item].push(corpusname);
 		});
 
-		// default target: first item or selected item
-		this.target = (this.target === undefined) ?Object.keys(this.list)[0] :this.target;
+		if (!this.target) {
+			// default target: url parameter or first item
+			this.target = _query[this.name] || Object.keys(this.list)[0]
+		}
 
 		// refresh
 		this.refresh();
@@ -294,6 +311,7 @@ class Setting {
 			var name = $(event.target).closest('.setting').attr('key');
 			if (source === 'meta-setting') me.parent.activateMetadata(name);
 			else if (source === 'align-setting') me.parent.activateAligntype(name);
+			else if (source === 'title-setting') me.parent.activateTitleDisplay(name);
 		});
 	}
 

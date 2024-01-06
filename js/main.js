@@ -19,6 +19,7 @@ class UI {
 		this.manageUI = new Manage(this);								// ui-aside.js
 		this.metaSettingUI = new Setting(this, '#meta-setting');		// ui-aside.js
 		this.alignSettingUI = new Setting(this, '#align-setting');		// ui-aside.js
+		this.titleSettingUI = new Setting(this, '#title-setting');		// ui-aside.js
 	}
 
 	// * * * * * * * * * * * * * * * * data * * * * * * * * * * * * * * * * *
@@ -62,6 +63,9 @@ class UI {
 		// default align type
 		aligntype.push('FullText');
 
+		// title metadata
+		var titleMeta = metadata.filter(meta => meta === '文件標題').concat(['檔名'])
+
 		// record corpus name - unique corpus id as corpus name
 		this.corporaRecord[name] = (name in this.corporaRecord) ?this.corporaRecord[name]+1 :0;
 		var suffix = (this.corporaRecord[name] > 0) ?`(${ this.corporaRecord[name] })` :'';
@@ -70,9 +74,11 @@ class UI {
 		// sub UI
 		this.metaSettingUI.addItems(metadata, name);
 		this.alignSettingUI.addItems(aligntype, name);
+		this.titleSettingUI.addItems(titleMeta, name);
 		this.mainUI.setCorpusData(name, data, aligntype, {
 			metadata: this.metaSettingUI.target,
-			aligntype: this.alignSettingUI.target
+			aligntype: this.alignSettingUI.target,
+			titleDisplay: this.titleSettingUI.target,
 		});
 	}
 
@@ -83,9 +89,11 @@ class UI {
 		this.manageUI.deleteCorpus(name);
 		this.metaSettingUI.deleteItems(name);
 		this.alignSettingUI.deleteItems(name);
+		this.titleSettingUI.deleteItems(name);
 		this.mainUI.deleteCorpus(name, {
 			metadata: this.metaSettingUI.target,
-			aligntype: this.alignSettingUI.target
+			aligntype: this.alignSettingUI.target,
+			titleDisplay: this.titleSettingUI.target,
 		});
 	}
 
@@ -127,6 +135,13 @@ class UI {
 		this.alignSettingUI.activateSetting(name);
 		this.mainUI.activateAligntype(name);
 	}
+
+	// set a title display metadata active
+	// name: string, name of active title display metadata
+	activateTitleDisplay(name) {
+		this.titleSettingUI.activateSetting(name);
+		this.mainUI.activateTitleDisplay(name);
+	}
 }
 
 
@@ -137,6 +152,15 @@ class UI {
 var _ui = new UI();
 var _docusky = new DocuSky();		// docusky.js
 var _parser = new DocuxmlParser();	// docuxmlParser.js
+
+// parse url parameter
+const { searchParams } = new URL(location.href)
+const _query = Object.fromEntries([...searchParams.entries()].map(
+	(([key, value]) => {
+		const parsedValue = key === 'corpus' ? value.split(',') : value
+		return [key, parsedValue]
+	})))
+
 
 
 // google analytics
@@ -154,7 +178,7 @@ $(document).ready(function() {
 
 	// register
 	_docusky.addControlObj('login', new Login(openPublicDB, loginDocusky));									// ui-aside.js
-	_docusky.addControlObj('corpusList', new CorpusList(logoutDocusky, switchDBList, getDataFromDocusky));	// ui-aside.js
+	_docusky.addControlObj('corpusList', new CorpusList(logoutDocusky, openLoginModal, switchDBList, getDataFromDocusky));	// ui-aside.js
 	
 	// explain text
 	$('#explain .modal-body').load('html/explain.html', function(argument) {
@@ -180,6 +204,17 @@ $(document).ready(function() {
 			jumpTo($(event.target).attr('data-to'));
 		});
 	});
+
+	// auto load open db
+	if (_query.db && _query.corpus) {
+		_query.corpus.forEach(corpus => {
+			getDataFromDocusky({
+				target: 'OPEN',
+				db: _query.db,
+				corpus,
+			})
+		})
+	}
 });
 
 
@@ -246,19 +281,21 @@ function getFileData(file) {
 	reader.filename = file.name;
 	reader.onload = processDataFromXML;
 	reader.readAsText(file);
-	console.log('load', file.name, +new Date());
 }
 
 
 // callback of get data from local
 // event: Event, file reader event
 function processDataFromXML(event) {
-	console.log('load fin', event.target.filename, +new Date());
 	var data = _parser.processXMLRowData(event.target.result);
-	console.log('parse fin', +new Date(), data)
 	for (let name in data) {
-		_ui.addCorpus(name);
-		_ui.setCorpusData(name, data[name]);
+		if (Object.keys(_ui.corporaRecord).includes(name)) {
+			// has corpus already
+			alert(`文獻集「${name}」已存在。`)
+		} else {
+			_ui.addCorpus(name);
+			_ui.setCorpusData(name, data[name]);
+		}
 	}
 }
 
@@ -271,9 +308,14 @@ function loginDocusky(username, password) {
 }
 
 
-// callback of submit login information
+// callback of submit logout
 function logoutDocusky() {
-	_docusky.logout();
+	_docusky.logout()
+}
+
+function openLoginModal() {
+	_docusky.controlObj.corpusList.modal('hide')
+	_docusky.controlObj.login.modal('show')
 }
 
 
@@ -293,10 +335,14 @@ function switchDBList(target) {
 // callback of submit selected corpus
 // param: object, needed parameters when get data from api
 function getDataFromDocusky(param) {
-	param.callback = processDataFromDocusky;
-	_ui.addCorpus(param.corpus);
-	_docusky.getData(param);
-	//console.log('send', param.db + '-' + param.corpus, +new Date());
+	if (Object.keys(_ui.corporaRecord).includes(param.corpus)) {
+		// has corpus already
+		alert(`文獻集「${param.corpus}」已存在。`)
+	} else {
+		param.callback = processDataFromDocusky;
+		_ui.addCorpus(param.corpus);
+		_docusky.getData(param);
+	}
 }
 
 
@@ -307,8 +353,6 @@ function getDataFromDocusky(param) {
 //	- docList: array(object), documents data from docusky
 //	- callback: function, execute after getting all data
 function processDataFromDocusky(param) {
-	//console.log('receive', param.db + '-' + param.corpus, +new Date());
 	var data = _parser.processDocuSkyRowData(param.docList);
-	//console.log('parse fin', +new Date(),data)
 	_ui.setCorpusData(param.corpus, data);
 }

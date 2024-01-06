@@ -448,11 +448,8 @@ class Corpus {
 			});
 		}
 
-		//console.log('click!');
-
 		// jump to read and highlight
 		$.each(this.parent.corpora, function() {
-			//console.log(this.name, this.read.para);
 
 			// have aligned
 			if (this.aligned[param.mode].length > 0) {
@@ -588,7 +585,7 @@ class Main {
 	// mode: string, record which mode user is, align or search
 	// query: string, cache the search query
 	// corpora: object, record each corpus's controller [corpusname: corpus controller(Corpus)]
-	// target: object, active metadata and aligntype [item: active name(string)]
+	// target: object, active settings [item: active name(string)]
 	constructor() {
 		this.ui = $('main');
 		this.mode = 'align';
@@ -596,7 +593,8 @@ class Main {
 		this.corpora = {};
 		this.target = {
 			metadata: undefined,
-			aligntype: undefined
+			aligntype: undefined,
+			titleDisplay: undefined,
 		};
 	}
 
@@ -620,13 +618,14 @@ class Main {
 	}
 
 	// delete a corpus in main UI
-	// name: string, name of delted corpus
-	// target: object, active metadata and aligntype [item: active name(string)]
+	// name: string, name of deleted corpus
+	// target: object, active settings [item: active name(string)]
 	deleteCorpus(name, target) {
 		this.corpora[name].delete();
 		this.setColumn();
 		this.activateMetadata(target.metadata);
 		this.activateAligntype(target.aligntype);
+		this.activateTitleDisplay(target.titleDisplay);
 		delete this.corpora[name];
 	}
 
@@ -659,7 +658,7 @@ class Main {
 		}
 	}
 
-	// change active alige type
+	// change active align type
 	// name: string, name of active align type
 	activateAligntype(name) {
 		var me = this;
@@ -678,6 +677,22 @@ class Main {
 				this.search(me.query);
 			}
 		});
+	}
+
+	// change active title display metadata
+	// titleDisplay: string, name of active title display metadata
+	activateTitleDisplay(titleDisplay) {
+		this.target.titleDisplay = titleDisplay;
+
+		// each corpus
+		Object.values(this.corpora).forEach(corpus => {
+			const data = corpus.documents
+			// each title block
+			Object.entries(corpus.contentUI.titleBlocks).forEach(([filename, titleBlock]) => {
+				const title = titleDisplay === '檔名' ? filename : data[filename].metadata[titleDisplay]
+				titleBlock.changeTitle(title)
+			})
+		})
 	}
 
 	// search blocks that contain query

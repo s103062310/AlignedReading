@@ -61,7 +61,7 @@ class DocuSky {
 			url: me.apiPath + 'userLogoutJson.php',
 
 			success: function(response) {
-				if (response.code == 0) me.controlObj.corpusList.modal('hide');		// logout success
+				if (response.code == 0) me.controlObj.corpusList.logout();		// logout success
 				else alert(response.message);										// logout fail
 			},
 
