@@ -219,7 +219,7 @@ class Manage {
 // * * * * * * * * * * * * * * * * setting * * * * * * * * * * * * * * * * *
 
 
-// controller of setting block (metadata, aligntype)
+// controller of setting block (metadata, aligntype, titledisplay)
 class Setting {
 
 	// ui: DOM, UI of setting block
@@ -294,6 +294,7 @@ class Setting {
 			var name = $(event.target).closest('.setting').attr('key');
 			if (source === 'meta-setting') me.parent.activateMetadata(name);
 			else if (source === 'align-setting') me.parent.activateAligntype(name);
+			else if (source === 'title-setting') me.parent.activateTitleDisplay(name);
 		});
 	}
 

@@ -19,6 +19,7 @@ class UI {
 		this.manageUI = new Manage(this);								// ui-aside.js
 		this.metaSettingUI = new Setting(this, '#meta-setting');		// ui-aside.js
 		this.alignSettingUI = new Setting(this, '#align-setting');		// ui-aside.js
+		this.titleSettingUI = new Setting(this, '#title-setting');		// ui-aside.js
 	}
 
 	// * * * * * * * * * * * * * * * * data * * * * * * * * * * * * * * * * *
@@ -62,6 +63,9 @@ class UI {
 		// default align type
 		aligntype.push('FullText');
 
+		// title metadata
+		var titleMeta = metadata.filter(meta => meta === '文件標題').concat(['檔名'])
+
 		// record corpus name - unique corpus id as corpus name
 		this.corporaRecord[name] = (name in this.corporaRecord) ?this.corporaRecord[name]+1 :0;
 		var suffix = (this.corporaRecord[name] > 0) ?`(${ this.corporaRecord[name] })` :'';
@@ -70,9 +74,10 @@ class UI {
 		// sub UI
 		this.metaSettingUI.addItems(metadata, name);
 		this.alignSettingUI.addItems(aligntype, name);
+		this.titleSettingUI.addItems(titleMeta, name);
 		this.mainUI.setCorpusData(name, data, aligntype, {
 			metadata: this.metaSettingUI.target,
-			aligntype: this.alignSettingUI.target
+			aligntype: this.alignSettingUI.target,
 		});
 	}
 
@@ -83,9 +88,11 @@ class UI {
 		this.manageUI.deleteCorpus(name);
 		this.metaSettingUI.deleteItems(name);
 		this.alignSettingUI.deleteItems(name);
+		this.titleSettingUI.deleteItems(name);
 		this.mainUI.deleteCorpus(name, {
 			metadata: this.metaSettingUI.target,
-			aligntype: this.alignSettingUI.target
+			aligntype: this.alignSettingUI.target,
+			titleDisplay: this.titleSettingUI.target,
 		});
 	}
 
@@ -126,6 +133,13 @@ class UI {
 	activateAligntype(name) {
 		this.alignSettingUI.activateSetting(name);
 		this.mainUI.activateAligntype(name);
+	}
+
+	// set a title display metadata active
+	// name: string, name of active title display metadata
+	activateTitleDisplay(name) {
+		this.titleSettingUI.activateSetting(name);
+		this.mainUI.activateTitleDisplay(name);
 	}
 }
 

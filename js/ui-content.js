@@ -45,22 +45,25 @@ class TitleBlock {
 
 	// ui: DOM, UI of title block
 	// parent: class Content, who creates this
-	constructor(parent, filename, alignable, isAlign) {
+	constructor(parent, filename, titles, alignable, isAlign) {
 		this.ui = undefined;
 		this.parent = parent;
-		this.init(filename, alignable, isAlign);
+		this.titles = titles
+		const title = titles['文件標題'] || titles['檔名']
+		this.init(filename, title, alignable, isAlign);
 	}
 
 	// initialization
 	// filename: string, name of a document
+	// text: string, displayed title text of a document
 	// alignable: bool, if this block can be aligned
 	// isAlign: bool, if this block is target of aligning
-	init(filename, alignable, isAlign) {
+	init(filename, text, alignable, isAlign) {
 		var me = this;
 
 		// html
 		var html = `<div class="title-block${ (alignable) ?' alignable' :'' }${ (isAlign) ?' target': '' }"${ (alignable) ?' data-toggle="tooltip" data-placement="top" data-original-title=""' :''}>
-						<span${ (alignable) ?' class="align-btn"' :'' }>${ filename }</span>
+						<span class="title-text${ (alignable) ?' align-btn' :'' }">${ text }</span>
 						<span class="meta-btn">
 							<i class="fa fa-angle-double-up" aria-hidden="true"></i>
 							<i class="fa fa-angle-double-down" aria-hidden="true"></i>
@@ -75,7 +78,7 @@ class TitleBlock {
 		$(this.ui).find('.align-btn').click(function(event) {
 			me.parent.parent.align({
 				mode: 'doc',
-				filename: filename,
+				filename,
 				clicked: $(event.target).closest('.title-block')
 			});
 		});
@@ -84,6 +87,14 @@ class TitleBlock {
 		$(this.ui).find('.meta-btn').click(function() {
 			me.parent.toggleMeta(filename);
 		});
+	}
+
+	// change displayed title
+	// titleDisplay: string, title display metadata
+	changeTitle(titleDisplay) {
+		const defaultTitle = this.titles['檔名']
+		const title = this.titles[titleDisplay]
+		$(this.ui).find('.title-text').html(title || defaultTitle)
 	}
 
 	// delete this block
@@ -322,8 +333,11 @@ class Content {
 			return;
 		}
 
+		// title
+		const titles = { '檔名': filename, '文件標題': data.metadata['文件標題'] }
+
 		// functions
-		var addTitleBlock = function() { me.titleBlocks[filename] = new TitleBlock(me, filename, alignable, isAlign); };
+		var addTitleBlock = function() { me.titleBlocks[filename] = new TitleBlock(me, filename, titles, alignable, isAlign); };
 		var addMetaBlock = function() { me.metaBlocks[filename] = new MetaBlock(me, data.metadata, linkMeta, targetMeta); };
 
 		// create file container

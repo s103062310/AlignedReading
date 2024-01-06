@@ -596,7 +596,7 @@ class Main {
 		this.corpora = {};
 		this.target = {
 			metadata: undefined,
-			aligntype: undefined
+			aligntype: undefined,
 		};
 	}
 
@@ -620,13 +620,14 @@ class Main {
 	}
 
 	// delete a corpus in main UI
-	// name: string, name of delted corpus
-	// target: object, active metadata and aligntype [item: active name(string)]
+	// name: string, name of deleted corpus
+	// target: object, active settings [item: active name(string)]
 	deleteCorpus(name, target) {
 		this.corpora[name].delete();
 		this.setColumn();
 		this.activateMetadata(target.metadata);
 		this.activateAligntype(target.aligntype);
+		this.activateTitleDisplay(target.titleDisplay);
 		delete this.corpora[name];
 	}
 
@@ -659,7 +660,7 @@ class Main {
 		}
 	}
 
-	// change active alige type
+	// change active align type
 	// name: string, name of active align type
 	activateAligntype(name) {
 		var me = this;
@@ -678,6 +679,18 @@ class Main {
 				this.search(me.query);
 			}
 		});
+	}
+
+	// change active title display metadata
+	// titleDisplay: string, name of active title display metadata
+	activateTitleDisplay(titleDisplay) {
+		// each corpus
+		Object.values(this.corpora).forEach(corpus => {
+			// each title block
+			Object.values(corpus.contentUI.titleBlocks).forEach(titleBlock => {
+				titleBlock.changeTitle(titleDisplay)
+			})
+		})
 	}
 
 	// search blocks that contain query
