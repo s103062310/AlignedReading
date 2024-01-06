@@ -448,11 +448,8 @@ class Corpus {
 			});
 		}
 
-		//console.log('click!');
-
 		// jump to read and highlight
 		$.each(this.parent.corpora, function() {
-			//console.log(this.name, this.read.para);
 
 			// have aligned
 			if (this.aligned[param.mode].length > 0) {

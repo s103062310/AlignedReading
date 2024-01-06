@@ -282,19 +282,21 @@ function getFileData(file) {
 	reader.filename = file.name;
 	reader.onload = processDataFromXML;
 	reader.readAsText(file);
-	console.log('load', file.name, +new Date());
 }
 
 
 // callback of get data from local
 // event: Event, file reader event
 function processDataFromXML(event) {
-	console.log('load fin', event.target.filename, +new Date());
 	var data = _parser.processXMLRowData(event.target.result);
-	console.log('parse fin', +new Date(), data)
 	for (let name in data) {
-		_ui.addCorpus(name);
-		_ui.setCorpusData(name, data[name]);
+		if (Object.keys(_ui.corporaRecord).includes(name)) {
+			// has corpus already
+			alert(`文獻集「${name}」已存在。`)
+		} else {
+			_ui.addCorpus(name);
+			_ui.setCorpusData(name, data[name]);
+		}
 	}
 }
 
@@ -334,10 +336,14 @@ function switchDBList(target) {
 // callback of submit selected corpus
 // param: object, needed parameters when get data from api
 function getDataFromDocusky(param) {
-	param.callback = processDataFromDocusky;
-	_ui.addCorpus(param.corpus);
-	_docusky.getData(param);
-	//console.log('send', param.db + '-' + param.corpus, +new Date());
+	if (Object.keys(_ui.corporaRecord).includes(param.corpus)) {
+		// has corpus already
+		alert(`文獻集「${param.corpus}」已存在。`)
+	} else {
+		param.callback = processDataFromDocusky;
+		_ui.addCorpus(param.corpus);
+		_docusky.getData(param);
+	}
 }
 
 
@@ -348,8 +354,6 @@ function getDataFromDocusky(param) {
 //	- docList: array(object), documents data from docusky
 //	- callback: function, execute after getting all data
 function processDataFromDocusky(param) {
-	//console.log('receive', param.db + '-' + param.corpus, +new Date());
 	var data = _parser.processDocuSkyRowData(param.docList);
-	//console.log('parse fin', +new Date(),data)
 	_ui.setCorpusData(param.corpus, data);
 }
