@@ -168,7 +168,7 @@ $(document).ready(function() {
 
 	// register
 	_docusky.addControlObj('login', new Login(openPublicDB, loginDocusky));									// ui-aside.js
-	_docusky.addControlObj('corpusList', new CorpusList(logoutDocusky, switchDBList, getDataFromDocusky));	// ui-aside.js
+	_docusky.addControlObj('corpusList', new CorpusList(logoutDocusky, openLoginModal, switchDBList, getDataFromDocusky));	// ui-aside.js
 	
 	// explain text
 	$('#explain .modal-body').load('html/explain.html', function(argument) {
@@ -285,9 +285,14 @@ function loginDocusky(username, password) {
 }
 
 
-// callback of submit login information
+// callback of submit logout
 function logoutDocusky() {
-	_docusky.logout();
+	_docusky.logout()
+}
+
+function openLoginModal() {
+	_docusky.controlObj.corpusList.modal('hide')
+	_docusky.controlObj.login.modal('show')
 }
 
 
