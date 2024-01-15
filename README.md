@@ -1,20 +1,20 @@
 # AlignedReading
-[Develop Weekly Progress](https://hackmd.io/@DocuSky/HJdOAaLXN)  
 Developed from [MultiLitReading](https://github.com/s103062310/MultiLitReading)  
 
-> 2021.01.27 | v.3.0  
-> 2021.05.19 | v.3.1, fix: bugs & update new links  
+## v3.2
+> 2024.01.15
+- add title display setting
+- add url parameter for auto loading
+- not login ui for public database list
+- fix error caused by same corpus name
+- fix english word break
+- update change log
 
-## CSS Files
-1. **body** => for whole UI setting
-2. **aside** => for side menu settings
-3. **main** => for main data displaying
+## v3.1
+> 2021.05.19
+- fix bugs
+- update new links 
 
-## JS Files
-1. **main** => web initialization and main functions
-2. **ui-aside** => defined asideUI-used classes
-3. **ui-main** => defined mainUI-used classes
-4. **ui-content** => defined contentUI-used classes
-5. **data** => defined data struct of aligned data
-6. **docusky** => communicate with docusky api
-7. **docuxmlParser** => defined data struct of docusky data and parse docuxml
+## v3.0
+> 2021.01.27
+- new implementation of docuxml align tool
