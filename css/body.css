@@ -63,9 +63,9 @@ header {
 	height: 5vh;
 	display: grid!important;
 	grid-template-columns: 5vh 5vh auto 5vh 5vh 5vh;
-	color: white;
-	background-color: #49525A;
-	box-shadow: 0 1px 3px rgba(0,0,0,.5);
+	color: var(--color--white);
+	background-color: var(--color--gray-darker);
+	box-shadow: 0 0 8px var(--color--shadow);
 	font-size: 3vh;
 	text-align: center;
 	z-index: 10;
@@ -79,8 +79,8 @@ header span {
 }
 
 .header-btn:hover {
-	color: #49525A;
-	background-color: white;
+	color: var(--color--gray-darker);
+	background-color: var(--color--white);
 	cursor: pointer;
 }
 
@@ -94,7 +94,7 @@ header span {
 	top: 6vh;
 	width: max-content;
 	height: max-content;
-	background: rgba(0,0,0,.75);
+	background: var(--color--tooltip);
 	border-radius: 5px;
 }
 
@@ -102,7 +102,7 @@ header span {
 	display: grid;
 	margin: 1vh;
 	font-size: 2vh;
-	color: white;
+	color: var(--color--white);
 }
 
 .arrow-t {
@@ -112,7 +112,7 @@ header span {
 	height: 0px;
 	border-width: 5px;
 	border-style: solid;
-	border-color: transparent transparent rgba(0,0,0,.75) transparent;
+	border-color: transparent transparent var(--color--tooltip) transparent;
 }
 
 /* ----- EXPLAIN ----- */
@@ -127,17 +127,17 @@ header span {
 	display: flex;
 	flex-direction: column;
 	border-radius: 5px;
-	box-shadow: 1px 0 5px rgba(0,0,0,.5);
+	box-shadow: 0 0 8px var(--color--shadow);
 	overflow-y: scroll;
 }
 
 .explain-dir-item {
 	padding: 0.5rem;
-	border-bottom: 1px solid gainsboro;
+	border-bottom: 1px solid var(--color--gray-lighter);
 }
 
 .explain-dir-item:hover {
-	background-color: #EFF3F7;
+	background-color: var(--color--blue-lighter);
 	cursor: pointer;
 }
 
@@ -165,7 +165,7 @@ header span {
 	margin: 1rem;
 	padding: 1rem 1rem 1rem 40px;
 	list-style-type: cambodian;
-	background-color: rgba(0,0,0,.05);
+	background-color: var(--color--gray-lighter);
 	border-radius: 5px;
 }
 

@@ -5,8 +5,8 @@ aside {
 	top: 5vh;
 	bottom: 0;
 	flex-flow: column nowrap;
-	background-color: #5C6770;
-	box-shadow: 1px 0 3px rgba(0,0,0,.5);
+	background-color: var(--color--gray-dark);
+	box-shadow: 0 0 8px var(--color--shadow);
 	overflow-y: scroll;
 	z-index: 5;
 }
@@ -14,7 +14,7 @@ aside {
 .control-item {
 	display: flex;
 	flex-flow: column nowrap;
-	color: white;
+	color: var(--color--white);
 	text-align: center;
 }
 
@@ -22,17 +22,17 @@ aside {
 	padding: 1.5vh;
 	font-size: 1.2rem;
 	cursor: pointer;
-	border-bottom: 1px solid #889096;
+	border-bottom: 1px solid var(--color--gray-light);
 }
 
 .control-item-title:hover {
-	background-color: #717B84;
+	background-color: var(--color--gray);
 }
 
 .control-item-content {
 	display: grid;
-	background-color: #717B84;
-	border-bottom: 1px solid #889096;
+	background-color: var(--color--gray);
+	border-bottom: 1px solid var(--color--gray-light);
 }
 
 /* ----- LOAD ----- */
@@ -43,7 +43,7 @@ aside {
 }
 
 #load > span:hover {
-	background-color: #889096;
+	background-color: var(--color--gray-light);
 }
 
 /* ----- SETTING ----- */
