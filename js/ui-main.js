@@ -469,6 +469,8 @@ class Corpus {
 	// search blocks that contain query in this corpus
 	// query: string, search target
 	search(query) {
+		if (query === '') return
+
 		var re = new RegExp(query, 'g');
 		var aligntype = this.parent.target.aligntype;
 
@@ -521,6 +523,10 @@ class Corpus {
 					metadata: {
 						'檢索詞總數': matchNum,
 						'含檢索詞段落數': result.length
+					},
+					title: {
+						'檔名': filename,
+						'文件標題': this.documents[filename].metadata['文件標題'],
 					}
 				}
 

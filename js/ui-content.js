@@ -331,7 +331,7 @@ class Content {
 
 		// title
 		const targetTitle = target.titleDisplay
-		const title = targetTitle === '檔名' ? filename : data.metadata[targetTitle]
+		const title = data.metadata[targetTitle] || data.title[targetTitle]
 
 		// functions
 		var addTitleBlock = function() { me.titleBlocks[filename] = new TitleBlock(me, filename, title, alignable, isAlign); };
