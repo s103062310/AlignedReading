@@ -42,8 +42,8 @@
 	<header>
 		<span id="menu" class="header-btn">
 			<i class="fa fa-bars" aria-hidden="true"></i>
-			<span class="tooltip-box" style="left: 1vh">
-				<span class="arrow-t" style="left: 1vh"></span>
+			<span class="tooltip-box" style="left: 6px">
+				<span class="arrow-t" style="left: 14px"></span>
 				<span class="tooltip-text">選單</span>
 			</span>
 		</span>
@@ -51,40 +51,40 @@
 		<span id="reset" class="header-btn">
 			<i class="fa fa-refresh" aria-hidden="true"></i>
 			<span class="tooltip-box">
-				<span class="arrow-t" style="left: 2vh"></span>
+				<span class="arrow-t" style="left: 30px"></span>
 				<span class="tooltip-text">清除對讀</span>
 			</span>
 		</span>
 
-		<span class="bold" style="margin-left: 5vh;">文本對讀工具</span>
+		<span class="header-title bold">文本對讀工具</span>
 
 		<span class="header-btn" data-toggle="modal" data-target="#explain">
 			<i class="fa fa-question-circle" aria-hidden="true"></i>
 			<span class="tooltip-box">
-				<span class="arrow-t" style="left: 2vh"></span>
+				<span class="arrow-t" style="left: 30px"></span>
 				<span class="tooltip-text">使用說明</span>
 			</span>
 		</span>
 
 		<span class="header-btn" onclick="window.open('../../docuTools/userMain/')">
 			<i class="fa fa-cloud" aria-hidden="true"></i>
-			<span class="tooltip-box" style="left: -3vh;">
-				<span class="arrow-t" style="left: 5vh"></span>
+			<span class="tooltip-box">
+				<span class="arrow-t" style="left: 38px"></span>
 				<span class="tooltip-text">我的資料庫</span>
 			</span>
 		</span>
 
 		<span class="header-btn" onclick="window.open('../../ds-01.home.html')">
 			<i class="fa fa-home" aria-hidden="true"></i>
-			<span class="tooltip-box" style="right: 0;">
-				<span class="arrow-t" style="right: 2vh"></span>
+			<span class="tooltip-box" style="right: 6px;">
+				<span class="arrow-t" style="right: 14px"></span>
 				<span class="tooltip-text">回首頁</span>
 			</span>
 		</span>
 	</header>
 
 	<!-- control board -->
-	<aside style="display: flex;">
+	<aside class="open">
 		<div class="control-item">
 			<div class="control-item-title bold">載入資料</div>
 			<div id="load" class="control-item-content">
@@ -117,9 +117,17 @@
 		<div class="control-item">
 			<div class="control-item-title bold">全文檢索</div>
 			<div id="search" class="control-item-content">
-				<input id="search-query" type="text" class="form-control" style="grid-area: input;">
-				<button id="search-btn" class="btn btn-dark" style="grid-area: search;"><i class="fa fa-search" aria-hidden="true"></i> 檢索</button>
-				<button id="search-reset" class="btn btn-dark" style="grid-area: reset;"><i class="fa fa-refresh" aria-hidden="true"></i> 清除</button>
+				<input id="search-query" type="text" class="form-control">
+				<div class="search-btn-group">
+					<button id="search-btn" class="btn btn-dark">
+						<i class="fa fa-search" aria-hidden="true"></i>
+						檢索
+					</button>
+					<button id="search-reset" class="btn btn-dark">
+						<i class="fa fa-refresh" aria-hidden="true"></i>
+						清除
+					</button>
+				</div>
 			</div>
 		</div>
 	</aside>

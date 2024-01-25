@@ -1,76 +1,82 @@
 /* ----- MAIN ----- */
 
 main {
-	position: fixed;
-	top: 5vh;
-	bottom: 0;
-	left: 20vw;
-	right: 0;
-	display: grid!important;
+	width: fit-content;
+	display: grid;
+	padding-top: 3rem;
+	flex-grow: 1;
+	grid-gap: 0.375rem;
 }
 
 .corpus-col {
-	border: 3px solid var(--color--blue-darker);
-	border-bottom: none;
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 3rem);
 }
 
 .corpus-title {
 	padding: 0.5rem;
-	display: grid;
-	grid-template-columns: auto 2.5rem;
+	display: flex;
 	align-items: center;
 	color: var(--color--white);
-	background-color: var(--color--blue-darker);
 	text-align: center;
 	font-size: 1.5rem;
 }
 
+.corpus-name {
+	flex-grow: 1;
+}
+
+.dir-btn {
+	width: 2rem;
+}
+
 .corpus-dir {
-	max-height: 40vh;
-	padding: 1rem;
-	display: grid;
+	max-height: 20rem;
+	padding: 0.375rem;
+	margin-bottom: 0.375rem;
 	overflow-y: scroll;
-	border-bottom: 5px solid var(--color--blue-darker);
+	background-color: var(--color--white);
 }
 
-.corpus-dir > div {
-	margin: 2.5px 0;
+.dir-item {
+	display: flex;
+	align-items: center;
 }
 
-.corpus-dir > div > span {
-	padding: 3px 8px;
-	border-radius: 5px;
+.dir-name {
+	margin-left: 0.375rem;
+	padding: 0.25rem;
+	border-radius: 0.25rem;
+	flex-grow: 1;
 }
 
-.corpus-dir > div > span:hover {
+.dir-name:hover {
 	background-color: var(--color--blue-lighter);
 	cursor: pointer;
 }
 
-.dir-item {
-	display: grid;
-	grid-template-columns: 1rem auto;
-	align-items: center;
-}
-
 .corpus-content {
-	padding: 0.25rem;
+	padding: 0.375rem;
+	background-color: var(--color--white);
 	overflow-y: scroll;
+	flex-grow: 1;
+	display: grid;
+	grid-gap: 0.25rem;
 }
 
 /* ----- TITLE BLOCK ----- */
 
 .title-block {
-	margin: 0.25rem;
 	padding: 0.25rem;
 	display: grid;
 	grid-template-columns: auto 2rem;
 	align-items: center;
 	color: var(--color--white);
 	background-color: var(--color--blue-dark);
-	font-size: 1.2rem;
+	font-size: 1.125rem;
 	text-align: center;
-	border-radius: 5px;
+	border-radius: 0.25rem;
 }
 
 .title-block.alignable:hover {
@@ -102,31 +108,34 @@ main {
 /* ----- META BLOCK ----- */
 
 .meta-block {
-	margin: 0.25rem;
 	padding: 0.5rem;
 	background-color: var(--color--blue);
-	border-radius: 5px;
+	border-radius: 0.25rem;
 }
 
-.meta-block .table {
-	margin: 0;
+.meta-table {
+	display: flex;
+	flex-direction: column;
 }
 
-.meta-block tr th,
-.meta-block tr td {
-	border: 1px solid var(--color--blue-dark);
-	vertical-align: middle;
+.meta-row {
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.25rem;
+}
+
+.meta-name {
+	padding: 0.125rem;
+	border-radius: 0.25rem;
+	color: var(--color--white);
+	background-color: var(--color--blue-dark);
 }
 
 /* ----- TEXT BLOCK ----- */
 
 .text-block {
-	margin: 5px;
 	padding: 0.5rem;
-	display: grid;
-	grid-row-gap: 5px;
 	background-color: var(--color--blue-lighter);
-	border-radius: 5px;
+	border-radius: 0.25rem;
 }
 
 .text-block.alignable:hover {
@@ -156,18 +165,22 @@ main {
 	cursor: pointer;
 }
 
+.term-in-text {
+	margin-bottom: 0.25rem;
+}
+
 .term-in-text span {
-	padding: 0 5px;
-	margin-right: 5px;
+	padding: 0.125rem 0.375rem;
+	border-radius: 0.25rem;
 }
 
 .searched {
-	margin: 3px;
-	padding: 0 3px;
+	margin: 0.125rem;
+	padding: 0.125rem;
 	color: var(--color--white);
 	background-color: indianred;
 	font-weight: bold;
-	border-radius: 5px;
+	border-radius: 0.25rem;
 }
 
 /* ----- VISIBILITY ----- */
@@ -180,10 +193,13 @@ i.fa-angle-double-up,
 	display: none;
 }
 
-.corpus-col.target,
 .dir-btn.open i.fa-folder,
 .dir-btn i.fa-folder-open,
 .open i.fa-angle-double-up,
 i.fa-angle-double-down {
 	display: block;
+}
+
+.corpus-col.target {
+	display: flex;
 }

@@ -189,14 +189,14 @@ class Manage {
 
 		// display
 		$(this.ui).append(
-			`<div class="manage-corpus target" key="${ name }">
-				<span>◆ </span>
-				<span>${ name }</span>
-				<span class="manage-corpus-eye">
+			`<div class="setting target" key="${ name }">
+				<span class="setting-child">◆</span>
+				<span class="setting-long-child">${ name }</span>
+				<span class="setting-child setting-eye">
 					<i class="fa fa-eye" aria-hidden="true"></i>
 					<i class="fa fa-eye-slash" aria-hidden="true"></i>
 				</span>
-				<i class="fa fa-trash manage-corpus-trash" aria-hidden="true"></i>
+				<i class="fa fa-trash setting-child setting-trash" aria-hidden="true"></i>
 			</div>`
 		);
 
@@ -205,12 +205,12 @@ class Manage {
 		this.entries[name] = target;
 
 		// onclick - eye icon: toggle corpus
-		$(target).find('.manage-corpus-eye').click(function() {
+		$(target).find('.setting-eye').click(function() {
 			me.parent.toggleCorpus(name);
 		});
 
 		// onclick - trash icon: delete corpus
-		$(target).find('.manage-corpus-trash').click(function() {
+		$(target).find('.setting-trash').click(function() {
 			me.parent.deleteCorpus(name);
 		});
 	}
@@ -295,9 +295,9 @@ class Setting {
 		Object.keys(this.list).forEach(item => {
 			$(this.ui).append(
 				`<div class="setting${ (item === this.target) ?' target' :'' }" key="${ item }">
-					<span>◆ </span>
-					<span>${ item }</span>
-					<span class="setting-toggle">
+					<span class="setting-child">◆</span>
+					<span class="setting-long-child">${ item }</span>
+					<span class="setting-child setting-toggle">
 						<i class="fa fa-toggle-on" aria-hidden="true"></i>
 						<i class="fa fa-toggle-off" aria-hidden="true"></i>
 					</span>

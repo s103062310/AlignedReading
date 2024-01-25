@@ -16,9 +16,15 @@
 	font-style: normal;
 }
 
+html {
+	font-size: 16px;
+}
+
 body {
 	font-family: apple-2!important;
 	word-break: break-word;
+	display: flex;
+	height: 100vh;
 }
 
 .bold {
@@ -38,7 +44,7 @@ i,
 }
 
 i:hover {
-	font-size: 1.3rem!important;
+	font-size: 1.25rem!important;
 	cursor: pointer;
 }
 
@@ -60,22 +66,28 @@ header {
 	left: 0;
 	right: 0;
 	top: 0;
-	height: 5vh;
-	display: grid!important;
-	grid-template-columns: 5vh 5vh auto 5vh 5vh 5vh;
+	height: 3rem;
+	display: flex;
 	color: var(--color--white);
 	background-color: var(--color--gray-darker);
 	box-shadow: 0 0 8px var(--color--shadow);
-	font-size: 3vh;
+	font-size: 1.5rem;
 	text-align: center;
 	z-index: 10;
 }
 
-header span {
-	height: 100%;
-	position: relative;
-	display: grid;
+.header-title {
+	flex-grow: 1;
+	display: flex;
 	align-items: center;
+	justify-content: center;
+}
+
+.header-btn {
+	width: 3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .header-btn:hover {
@@ -91,17 +103,17 @@ header span {
 .tooltip-box {
 	display: none;
 	position: absolute;
-	top: 6vh;
+	top: 2.625rem;
 	width: max-content;
 	height: max-content;
 	background: var(--color--tooltip);
-	border-radius: 5px;
+	border-radius: 0.25rem;
 }
 
 .tooltip-text {
 	display: grid;
-	margin: 1vh;
-	font-size: 2vh;
+	margin: 0.375rem;
+	font-size: 0.875rem;
 	color: var(--color--white);
 }
 
@@ -126,7 +138,7 @@ header span {
 .explain-dir {
 	display: flex;
 	flex-direction: column;
-	border-radius: 5px;
+	border-radius: 0.375rem;
 	box-shadow: 0 0 8px var(--color--shadow);
 	overflow-y: scroll;
 }

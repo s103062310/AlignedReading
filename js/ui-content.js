@@ -30,7 +30,7 @@ class Directory {
 		var me = this;
 
 		// display
-		$(this.ui).append(`<div class="dir-item">└ <span>${ text }</span></div>`);
+		$(this.ui).append(`<div class="dir-item">└<span class="dir-name">${ text }</span></div>`);
 
 		// onclick
 		$(this.ui).children().last().click(function() {
@@ -123,24 +123,24 @@ class MetaBlock {
 		for (let name in metadata) {
 			let value = (linkMeta[name] !== undefined) ?`<a href="${ linkMeta[name] }" target="_blank">${ metadata[name] }</a>`
 													   :metadata[name];
-			table += `<tr key="${ name }">
-						<th scope="row">${ name }</th>
-						<td>${ value }</td>
-					</tr>`;
+			table += `<div class="meta-row" key="${ name }">
+						<span class="meta-name">${ name }</span>
+						<span>${ value }</span>
+					</div>`;
 		}
 
 		// html
 		var html = `<div class="meta-block" style="display: none;">
-						<table class="table table-bordered table-sm">
-							<tbody>${ table }</tbody>
-						</table>
+						<div class="meta-table">
+							${ table }
+						</div>
 					</div>`;
 
 		// display
 		this.ui = this.parent.addBlock(html);
 
 		// activate target metadata
-		$(this.ui).find(`tr[key="${ target }"]`).addClass('table-warning');
+		$(this.ui).find(`.meta-row[key="${ target }"]`).addClass('table-warning');
 	}
 
 	// delete this block

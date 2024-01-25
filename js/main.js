@@ -6,12 +6,8 @@
 // controller of the whole ui
 class UI {
 
-	// constB: int, constant that used to calculate boundary
-	// boundary: int, boundary of aside and main (left 0-100 right)
 	// corporaRecord: object, count number of each corpus name, used to generate unique corpus id [corpusname: number(int)]
 	constructor() {
-		this.constB = 20;
-		this.boundary = 20;
 		this.corporaRecord = {};
 		
 		// UI
@@ -101,18 +97,7 @@ class UI {
 
 	// toggle aside
 	toggle() {
-		this.boundary = this.constB - this.boundary;
-
-		// aside
-		$('aside').animate({
-			left: `${ this.boundary - this.constB }vw`, 
-			right: `${ 100 - this.boundary }vw`
-		}, 'fast');
-
-		// main
-		$('main').animate({
-			left: `${ this.boundary }vw`
-		}, 'fast');
+		$('aside').toggleClass('open')
 	}
 
 	// toggle visualization of a corpus

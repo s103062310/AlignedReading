@@ -102,9 +102,6 @@ class Corpus {
 		// remove empty page
 		if (this.pages.last().length <= 0) this.pages.pop();
 
-		// adjust height of content block
-		this.adjustHeight(true);
-
 		// display default page
 		this.nowPage = [0, 1, 2];
 		this.displayAllPage();
@@ -124,17 +121,6 @@ class Corpus {
 
 	// * * * * * * * * * * * * * * * * directory * * * * * * * * * * * * * * * * *
 
-	// re-calculate height of content ui when toggle directory block
-	// open: bool, now status of directory block
-	adjustHeight(open) {
-		var getHeight = function(selector) { return parseInt($(selector).css('height').replace('px', '')); };
-		var mainH = getHeight($('aside'));
-		var titleH = getHeight($(this.ui).find('.corpus-title'));
-		var dirH = (open) ?0 :getHeight(this.dirUI.ui);
-		var height = mainH - titleH - dirH;
-		$(this.contentUI.ui).css('height', `${ height }px`);
-	}
-
 	// toggle ui of directory block of this corpus
 	// span: DOM, ui of toggle-dir-btn
 	toggleDir(span) {
@@ -145,9 +131,7 @@ class Corpus {
 		$(span).toggleClass('open');
 
 		// dir block
-		if (open) this.adjustHeight(open);
 		this.dirUI.toggle();
-		if (!open) setTimeout(function() { me.adjustHeight(open); }, 300);	
 	}
 
 	// check if block is in window now and then jump
@@ -656,8 +640,8 @@ class Main {
 	activateMetadata(name) {
 		this.target.metadata = name;
 		if (this.mode === 'align') {
-			$(this.ui).find('tr.table-warning').removeClass('table-warning');
-			$(this.ui).find(`tr[key="${ name }"]`).addClass('table-warning');
+			$(this.ui).find('.meta-row.table-warning').removeClass('table-warning');
+			$(this.ui).find(`.meta-row[key="${ name }"]`).addClass('table-warning');
 			$.each(this.corpora, function() {
 				this.contentUI.setMetaTooltip();
 			});
@@ -728,6 +712,7 @@ class Main {
 	setColumn() {
 		var visibleCount = $(this.ui).find('.corpus-col.target').length;
 		$(this.ui).css('grid-template-columns', `repeat(${ visibleCount }, 1fr)`);
+		$(this.ui).css('background-color', 'var(--color--blue-darker)');
 	}
 }
 
