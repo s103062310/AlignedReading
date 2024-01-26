@@ -32,6 +32,7 @@ main {
 }
 
 .corpus-dir {
+	flex-shrink: 0;
 	max-height: 20rem;
 	padding: 0.375rem;
 	margin-bottom: 0.375rem;
@@ -58,11 +59,12 @@ main {
 
 .corpus-content {
 	padding: 0.375rem;
-	background-color: var(--color--white);
 	overflow-y: scroll;
 	flex-grow: 1;
-	display: grid;
+	display: flex;
+	flex-direction: column;
 	grid-gap: 0.25rem;
+	background-color: var(--color--white);
 }
 
 /* ----- TITLE BLOCK ----- */

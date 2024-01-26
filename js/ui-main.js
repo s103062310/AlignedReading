@@ -617,6 +617,9 @@ class Main {
 		this.activateAligntype(target.aligntype);
 		this.activateTitleDisplay(target.titleDisplay);
 		delete this.corpora[name];
+		if (Object.keys(this.corpora).length === 0) {
+			$('body').css('background-color', '');
+		}
 	}
 
 	// * * * * * * * * * * * * * * * * interaction * * * * * * * * * * * * * * * * *
@@ -712,7 +715,7 @@ class Main {
 	setColumn() {
 		var visibleCount = $(this.ui).find('.corpus-col.target').length;
 		$(this.ui).css('grid-template-columns', `repeat(${ visibleCount }, 1fr)`);
-		$(this.ui).css('background-color', 'var(--color--blue-darker)');
+		$('body').css('background-color', 'var(--color--blue-darker)');
 	}
 }
 
