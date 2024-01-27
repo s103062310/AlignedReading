@@ -137,6 +137,8 @@ class UI {
 var _ui = new UI();
 var _docusky = new DocuSky();		// docusky.js
 var _parser = new DocuxmlParser();	// docuxmlParser.js
+const _legalLang = { zh: 'zh', en: 'en' }
+let _lang = 'zh'
 
 // parse url parameter
 const { searchParams } = new URL(location.href)
@@ -145,7 +147,6 @@ const _query = Object.fromEntries([...searchParams.entries()].map(
 		const parsedValue = key === 'corpus' ? value.split(',') : value
 		return [key, parsedValue]
 	})))
-
 
 
 // google analytics
@@ -189,6 +190,9 @@ $(document).ready(function() {
 			jumpTo($(event.target).attr('data-to'));
 		});
 	});
+
+	// language
+	switchLanguage(_legalLang[_query['l']] || 'zh')
 
 	// auto load open db
 	if (_query.db && _query.corpus) {

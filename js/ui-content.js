@@ -121,8 +121,9 @@ class MetaBlock {
 
 		// metadata table
 		for (let name in metadata) {
-			let value = (linkMeta[name] !== undefined) ?`<a href="${ linkMeta[name] }" target="_blank">${ metadata[name] }</a>`
-													   :metadata[name];
+			let value = (linkMeta[name] !== undefined) 
+				? `<a href="${ linkMeta[name] }" target="_blank">${ metadata[name] }</a>`
+				: metadata[name];
 			table += `<div class="meta-row" key="${ name }">
 						<span class="meta-name">${ name }</span>
 						<span>${ value }</span>

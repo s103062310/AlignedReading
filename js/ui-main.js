@@ -500,13 +500,14 @@ class Corpus {
 			if (result.length > 0) {
 
 				// record result
+				const getText = getTextFunc(_lang)
 				this.searchPages.last().push(filename);
 				this.searchResult[filename] = {
 					content: result,
 					page: this.searchPages.length-1,
 					metadata: {
-						'檢索詞總數': matchNum,
-						'含檢索詞段落數': result.length
+						[getText('searchCount')]: matchNum,
+						[getText('searchParagraphCount')]: result.length
 					},
 					title: {
 						'檔名': filename,

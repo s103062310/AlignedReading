@@ -112,10 +112,11 @@ class CorpusList {
 		});
 
 		// UI
-		$('#corpus-list-label').html(isUserDB ? '我的資料庫' : '公開資料庫')
-		$('#account-btn').html(this.isLogin ? '登出' : '登入')
+		const getText = getTextFunc(_lang)
+		$('#corpus-list-label').html(isUserDB ? getText('corpusTitlePersonal') : getText('corpusTitlePublic'))
+		$('#account-btn').html(this.isLogin ? getText('corpusLogoutBtn') : getText('corpusLoginBtn'))
 		$('#account-btn').click(this.isLogin ? this.logoutFunc : this.loginFunc)
-		$('#switch-db-btn').html(isUserDB ? '公開資料庫' : '我的資料庫')
+		$('#switch-db-btn').html(isUserDB ? getText('corpusPublicBtn') : getText('corpusMyBtn'))
 		$('#switch-db-btn').attr('data-target', isUserDB ? 'OPEN' : 'USER')
 		$('#switch-db-btn').css('display', this.isLogin ? 'inline-block' : 'none')
 		this.modal('show')
@@ -125,7 +126,7 @@ class CorpusList {
 		this.isLogin = false
 		if (this.target === "USER") this.modal('hide')
 		else {
-			$('#account-btn').html('登入')
+			$('#account-btn').html(getText('corpusLoginBtn'))
 			$('#account-btn').click(this.loginFunc)
 			$('#switch-db-btn').css('display', 'none')
 		}
