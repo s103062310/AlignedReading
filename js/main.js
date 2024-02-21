@@ -25,6 +25,12 @@ class UI {
 	addCorpus(name) {
 		this.manageUI.addCorpus(name);
 		this.mainUI.addCorpus(name);
+
+		// close corpus if not default
+		const corpusLang = /[a-zA-z]/.test(name) ? 'en' : 'zh'
+		if (corpusLang !== _lang) {
+			this.toggleCorpus(name)
+		}
 	}
 
 	// set data of corpus
@@ -142,12 +148,19 @@ let _lang = 'zh'
 
 // parse url parameter
 const { searchParams } = new URL(location.href)
-const _query = Object.fromEntries([...searchParams.entries()].map(
+let _query = Object.fromEntries([...searchParams.entries()].map(
 	(([key, value]) => {
 		const parsedValue = key === 'corpus' ? value.split(',') : value
 		return [key, parsedValue]
 	})))
-
+_query = {
+	..._query,
+	db: '四福音對讀中英文版',
+	corpus: ['01馬太福音', '02馬可福音', '03路加福音', '04約翰福音', '01_Matthew', '02_Mark', '03_Luke', '04_John'],
+	meta: '文件標題',
+	align: 'Time',
+	title: '文件標題',
+}
 
 // google analytics
 if (typeof gtagEventLog == 'function') {
@@ -165,34 +178,20 @@ $(document).ready(function() {
 	// register
 	_docusky.addControlObj('login', new Login(openPublicDB, loginDocusky));									// ui-aside.js
 	_docusky.addControlObj('corpusList', new CorpusList(logoutDocusky, openLoginModal, switchDBList, getDataFromDocusky));	// ui-aside.js
-	
-	// explain text
-	$('#explain .modal-body').load('html/explain.html', function(argument) {
-
-		// jump
-		var jumpTo = function(key) {
-			var now = $('.explain-content').scrollTop();
-			var offset = $(`.explain-content [data-key="${ key }"]`).offset().top - $('.explain-content').offset().top;
-
-			// animate
-			$('.explain-content').animate({
-				scrollTop: now + offset
-			}, 'fast');
-		};
-		
-		// onclick - directory
-		$('.explain-dir-item').click(function(event) {
-			jumpTo($(event.target).attr('data-key'));
-		});
-
-		// onclick - link
-		$('.link').click(function(event) {
-			jumpTo($(event.target).attr('data-to'));
-		});
-	});
 
 	// language
 	switchLanguage(_legalLang[_query['l']] || 'zh')
+
+	// home link
+	$('#home').click(() => {
+		const filename = _lang === 'zh' ? 'index.html' : 'index_en.html'
+		window.open(`https://docusky.org.tw/DocuSky/projects/ntu/ar4g/${filename}`, '_blank', 'noopener')
+	})
+
+	// explain link
+	$('#explain').click(() => {
+		window.open(`./assets/instructions_${_legalLang[_lang] || 'zh'}.pdf`, '_blank', 'noopener')
+	})
 
 	// auto load open db
 	if (_query.db) {

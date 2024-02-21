@@ -197,7 +197,6 @@ class Manage {
 					<i class="fa fa-eye" aria-hidden="true"></i>
 					<i class="fa fa-eye-slash" aria-hidden="true"></i>
 				</span>
-				<i class="fa fa-trash setting-child setting-trash" aria-hidden="true"></i>
 			</div>`
 		);
 

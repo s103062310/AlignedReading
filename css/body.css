@@ -25,6 +25,7 @@ body {
 	word-break: break-word;
 	display: flex;
 	height: 100vh;
+	background-color: var(--color--black);
 }
 
 .bold {
@@ -77,6 +78,20 @@ header {
 	border-bottom: 1px solid var(--color--gray-light);
 }
 
+.logo {
+	width: 5.25rem;
+	height: 3rem;
+	background-size: 3.75rem;
+	background-repeat: no-repeat;
+	background-position-x: 0.75rem;
+	background-position-y: 0.75rem;
+	background-image: url('https://docusky.org.tw/DocuSky/images/logo/C_WH_small.png');
+}
+
+.logo:hover {
+	background-image: url('https://docusky.org.tw/DocuSky/images/logo/C_BK_small.png');
+}
+
 .header-title {
 	flex-grow: 1;
 	display: flex;
@@ -115,7 +130,7 @@ header {
 	display: grid;
 	margin: 0.375rem;
 	font-size: 0.875rem;
-	color: var(--color--white);
+	color: var(--color--black);
 }
 
 .arrow-t {
@@ -157,7 +172,7 @@ header {
 }
 
 .lang-item:hover {
-	background-color: var(--color--gray-dark);
+	background-color: var(--color--gray);
 }
 
 /* ----- EXPLAIN ----- */
@@ -222,4 +237,13 @@ header {
 	color: #0056B3;
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+.btn-dark {
+	background-color: var(--color--blue-dark);
+	border: none;
+}
+
+.btn-dark:hover {
+	background-color: var(--color--gray-light);
 }
