@@ -25,6 +25,10 @@ main {
 
 .corpus-name {
 	flex-grow: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.375rem;
 }
 
 .dir-btn {
@@ -53,7 +57,7 @@ main {
 }
 
 .dir-name:hover {
-	background-color: var(--color--blue-lighter);
+	background-color: var(--color--blue-light);
 	cursor: pointer;
 }
 
@@ -64,7 +68,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	grid-gap: 0.25rem;
-	background-color: var(--color--white);
+	background-color: var(--color--blue-darker);
 }
 
 /* ----- TITLE BLOCK ----- */
@@ -82,7 +86,7 @@ main {
 }
 
 .title-block.alignable:hover {
-	background-color: var(--color--blue-darker);
+	background-color: var(--color--gray-light);
 	cursor: pointer;
 }
 

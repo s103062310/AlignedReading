@@ -50,7 +50,10 @@ class Corpus {
 		// html of the whole corpus: default - dir/meta close
 		var html = `<div class="corpus-col target" name="${ this.name }">
 						<div class="corpus-title bold">
-							<span class="corpus-name">${ this.name }</span>
+							<div class="corpus-name">
+								<img src="./assets/${ this.name.substring(0, 2) }.png" width="40" />
+								<span>${ this.name }</span>
+							</div>
 							<span class="dir-btn">
 								<i class="fa fa-folder" aria-hidden="true"></i>
 								<i class="fa fa-folder-open" aria-hidden="true"></i>

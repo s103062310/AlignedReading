@@ -13,13 +13,15 @@ const switchLanguage = lang => {
   
   // nav
   $('.header-title').text(getText('title'))
-  const tooltip = ['navMenu', 'navReset', 'navReadme', 'navDashboard', 'navHome']
+  const tooltip = ['navMenu', 'navReset', 'navReadme', 'navHome']
   $('.tooltip-text').each(function(index) {
-    $(this).text(getText(tooltip[index]))
+    if (index < 4) {
+      $(this).text(getText(tooltip[index]))
+    }
   })
   
   // aside
-  const menuTitle = ['menuLoad', 'menuManage', 'menuMeta', 'menuAlign', 'menuTitle', 'menuSearch']
+  const menuTitle = ['menuManage', 'menuSearch']
   $('.control-item-title').each(function(index) {
     $(this).text(getText(menuTitle[index]))
   })
@@ -43,9 +45,6 @@ const switchLanguage = lang => {
     }
   })
   $('#load-from-docusky-btn').text(getText('corpusLoadBtn'))
-
-  // explain
-  $('#explain-label').text(getText('readmeTitle'))
 
   //search
   $(`[key="${_zh.searchCount}"] .meta-name`).text(getText('searchCount'))

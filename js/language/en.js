@@ -1,5 +1,5 @@
 const _en = {
-  title: 'Text Aligned Reading Tool',
+  title: 'Aligned Reading System of Four Gospels',
   navMenu: 'Menu',
   navReset: 'Clear Alignment',
   navReadme: 'Instructions',

@@ -1,21 +1,21 @@
 :root {
   /* gray */
   --color--black: #000000;
-  --color--gray-darker: #49525A; /* navbar */
-  --color--gray-dark: #5C6770; /* aside */
-  --color--gray: #717B84; /* aside hover & content */
-  --color--gray-light: #889096; /* aside content hover & border */
+  --color--gray-darker: #000000; /* navbar */
+  --color--gray-dark: #000000; /* aside */
+  --color--gray: #333333; /* aside hover & content & title hover */
+  --color--gray-light: #777777; /* aside content hover & border */
   --color--gray-lighter: #e8e8e8; /* explain */
   --color--white: #ffffff;
 
   /* blue - main visual */
-  --color--blue-darker: #4F667D; /* bg & title hover */
-  --color--blue-dark: #667E95; /* title & meta border*/
-  --color--blue: #CAD7E3; /* meta */
-  --color--blue-light: #DFE7EE; /* text hover */
-  --color--blue-lighter: #EFF3F7; /* text & dir hover */
+  --color--blue-darker: #000000; /* bg */
+  --color--blue-dark: #555555; /* title & meta border*/
+  --color--blue: #cccccc; /* meta */
+  --color--blue-light: #eeeeee; /* text hover & dir hover */
+  --color--blue-lighter: #ffffff; /* text */
 
   /* transparent */
-  --color--shadow: #00000080;
-  --color--tooltip: #000000C0;
+  --color--shadow: #ffffff80;
+  --color--tooltip: #eeeeeef0;
 }

@@ -7,14 +7,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 	<!-- link information -->
-	<meta property="og:title" content="文本對讀工具"/>
-	<meta property="og:description" content="這是個將數個 DocuXml 中的文件，依照特定的標記或 metadata（如：年代、日期或對讀標記）對齊排列，方便對讀的工具。"/>
-	<meta property="description" content="這是個將數個 DocuXml 中的文件，依照特定的標記或 metadata（如：年代、日期或對讀標記）對齊排列，方便對讀的工具。"/>
-	<meta property="og:image" content="images/cover.jpeg"/>
+	<meta property="og:title" content="四福音對讀系統"/>
+	<meta property="og:description" content="這是運用DocuSky數位人文學術研究平臺的文本對讀工具製作的四福音書對讀系統。"/>
+	<meta property="description" content="這是運用DocuSky數位人文學術研究平臺的文本對讀工具製作的四福音書對讀系統。" />
+	<meta property="og:image" content="assets/cover.jpg"/>
 
 	<!-- browser tab -->
-	<link rel="icon" href="https://docusky.org.tw/DocuSky/images/logo/icon.png">
-	<title>文本對讀工具</title>	
+	<link rel="icon" href="./assets/icon.png">
+	<title>四福音對讀系統</title>	
 
 	<!-- assets -->
 	<script src="https://docusky.org.tw/DocuSky/packages/jquery/v.2.2.4/jquery.min.js"></script>
@@ -57,7 +57,7 @@
 			</span>
 		</span>
 
-		<span class="header-title bold">文本對讀工具</span>
+		<span class="header-title bold">四福音對讀系統</span>
 
 		<span class="header-btn" 
 			onmouseenter="$('.lang-selector').removeClass('hide')"
@@ -71,7 +71,7 @@
 			</span>
 		</span>
 
-		<span class="header-btn" data-toggle="modal" data-target="#explain">
+		<span class="header-btn" id="explain">
 			<i class="fa fa-question-circle" aria-hidden="true"></i>
 			<span class="tooltip-box">
 				<span class="arrow-t"></span>
@@ -79,19 +79,19 @@
 			</span>
 		</span>
 
-		<span class="header-btn" onclick="window.open('https:\/\/docusky.org.tw/DocuSky/docuTools/userMain/')">
-			<i class="fa fa-cloud" aria-hidden="true"></i>
+		<span class="header-btn" id="home">
+			<i class="fa fa-home" aria-hidden="true"></i>
 			<span class="tooltip-box">
 				<span class="arrow-t"></span>
-				<span class="tooltip-text">我的資料庫</span>
+				<span class="tooltip-text">回首頁</span>
 			</span>
 		</span>
 
-		<span class="header-btn" onclick="window.open('https:\/\/docusky.org.tw/DocuSky/home/')">
-			<i class="fa fa-home" aria-hidden="true"></i>
+		<span class="header-btn" style="width: 5.25rem" onclick="window.open('https:\/\/docusky.org.tw/DocuSky/home/')">
+			<span class="logo"></span>
 			<span class="tooltip-box" style="right: 6px">
 				<span class="arrow-t"></span>
-				<span class="tooltip-text">回首頁</span>
+				<span class="tooltip-text">DocuSky</span>
 			</span>
 		</span>
 	</header>
@@ -99,32 +99,8 @@
 	<!-- control board -->
 	<aside class="open">
 		<div class="control-item">
-			<div class="control-item-title bold">載入資料</div>
-			<div id="load" class="control-item-content">
-				<input id="upload-xml" type="file" accept=".xml" multiple style="display: none;" />
-				<span id="load-from-local">上傳 XML 檔案</span>
-				<span id="load-from-docusky">從 DocuSky 匯入</span>
-			</div>
-		</div>
-
-		<div class="control-item">
 			<div class="control-item-title bold">文本管理</div>
 			<div id="manage" class="control-item-content"></div>
-		</div>
-
-		<div class="control-item">
-			<div class="control-item-title bold">文件對讀設定</div>
-			<div id="meta-setting" class="control-item-content"></div>
-		</div>
-
-		<div class="control-item">
-			<div class="control-item-title bold">段落對讀設定</div>
-			<div id="align-setting" class="control-item-content"></div>
-		</div>
-
-		<div class="control-item">
-			<div class="control-item-title bold">標題顯示設定</div>
-			<div id="title-setting" class="control-item-content"></div>
 		</div>
 
 		<div class="control-item">
@@ -203,19 +179,6 @@
 					<button id="switch-db-btn" type="button" class="btn btn-info" style="margin-right: auto"></button>
 					<button id="load-from-docusky-btn" type="button" class="btn btn-danger">載入</button>
 				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- explain modal -->
-	<div id="explain" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="explain-label" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 90vw;">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 id="explain-label" class="modal-title bold">使用說明</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				</div>
-				<div class="modal-body" style="height: 80vh;"></div>
 			</div>
 		</div>
 	</div>
