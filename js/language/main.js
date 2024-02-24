@@ -19,7 +19,7 @@ const switchLanguage = lang => {
   })
   
   // aside
-  const menuTitle = ['menuLoad', 'menuManage', 'menuMeta', 'menuAlign', 'menuTitle', 'menuSearch']
+  const menuTitle = ['menuManage', 'menuSearch']
   $('.control-item-title').each(function(index) {
     $(this).text(getText(menuTitle[index]))
   })

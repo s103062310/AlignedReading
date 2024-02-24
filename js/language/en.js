@@ -1,5 +1,5 @@
 const _en = {
-  title: 'Text Aligned Reading Tool',
+  title: 'Aligned Reading System of The Three Commentaries of Chunqiu',
   navMenu: 'Menu',
   navReset: 'Clear Alignment',
   navReadme: 'Instructions',

@@ -142,12 +142,19 @@ let _lang = 'zh'
 
 // parse url parameter
 const { searchParams } = new URL(location.href)
-const _query = Object.fromEntries([...searchParams.entries()].map(
+let _query = Object.fromEntries([...searchParams.entries()].map(
 	(([key, value]) => {
 		const parsedValue = key === 'corpus' ? value.split(',') : value
 		return [key, parsedValue]
 	})))
-
+_query = {
+	..._query,
+	db: '春秋三傳',
+	corpus: ['春秋', '春秋左氏傳', '春秋公羊傳', '春秋穀梁傳'],
+	meta: '文件標題',
+	align: 'Time',
+	title: '文件標題',
+}
 
 // google analytics
 if (typeof gtagEventLog == 'function') {
@@ -167,7 +174,7 @@ $(document).ready(function() {
 	_docusky.addControlObj('corpusList', new CorpusList(logoutDocusky, openLoginModal, switchDBList, getDataFromDocusky));	// ui-aside.js
 	
 	// explain text
-	$('#explain .modal-body').load('html/explain.html', function(argument) {
+	$('#explain .modal-body').load('html/explain_chunqiu.html', function(argument) {
 
 		// jump
 		var jumpTo = function(key) {
