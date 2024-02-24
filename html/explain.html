@@ -16,7 +16,8 @@
 	<div class="explain-dir-item" data-key="3-2-2">　└ 3-2-2 文本管理</div>
 	<div class="explain-dir-item" data-key="3-2-3">　└ 3-2-3 文件對讀設定</div>
 	<div class="explain-dir-item" data-key="3-2-4">　└ 3-2-4 段落對讀設定</div>
-	<div class="explain-dir-item" data-key="3-2-5">　└ 3-2-5 全文檢索</div>
+	<div class="explain-dir-item" data-key="3-2-5">　└ 3-2-5 標題顯示設定</div>
+	<div class="explain-dir-item" data-key="3-2-6">　└ 3-2-6 全文檢索</div>
 	<div class="explain-dir-item" data-key="3-3">└ 3-3 文本顯示區</div>
 	<div class="explain-dir-item" data-key="3-3-1">　└ 3-3-1 標題區塊</div>
 	<div class="explain-dir-item" data-key="3-3-2">　└ 3-3-2 詮釋資料區塊</div>
@@ -293,7 +294,7 @@
 			</div>
 
 			<div class="text-center">
-				<img width="90%" src="images/3.jpeg">
+				<img width="90%" src="images/3.png">
 			</div>
 		</div>
 
@@ -305,6 +306,7 @@
 					<li><b>選單按鈕 <i class="fa fa-bars" aria-hidden="true"></i>：</b>隱藏/顯示 功能選單。</li>
 					<li><b>清除按鈕 <i class="fa fa-refresh" aria-hidden="true"></i>：</b>還原介面至未對讀前的狀態。</li>
 					<li><b>工具名稱：</b>文本對讀工具。</li>
+					<li><b>語言選單 <i class="fa fa-language" aria-hidden="true"></i>：</b>選擇語言。</li>
 					<li><b>說明按鈕 <i class="fa fa-question-circle" aria-hidden="true"></i>：</b>顯示本說明。</li>
 					<li><b>資料庫按鈕 <i class="fa fa-cloud" aria-hidden="true"></i>：</b>回到 DocuSky 個人雲端資料庫頁面。</li>
 					<li><b>首頁按鈕 <i class="fa fa-home" aria-hidden="true"></i>：</b>回到 DocuSky 首頁。</li>
@@ -373,12 +375,23 @@
 
 		<div class="multi-col" data-key="3-2-5" style="grid-template-columns: 2fr 1fr;">
 			<div>
-				<h6><b>3-2-5 全文檢索</b></h6>
+				<h6><b>3-2-5 標題顯示設定</b></h6>
+				<p>可選擇「文件標題」或者「檔名」當作標題區塊的顯示，以 <i class="fa fa-toggle-on" aria-hidden="true"></i> 圖示標示出目前被選定為標題顯示依據的資料，點按 <i class="fa fa-toggle-off" aria-hidden="true"></i> 圖示可以切換設定。</p>
+			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/3-2-5.png">
+			</div>
+		</div>
+
+		<div class="multi-col" data-key="3-2-6" style="grid-template-columns: 2fr 1fr;">
+			<div>
+				<h6><b>3-2-6 全文檢索</b></h6>
 				<p>在文字框中輸入檢索詞後，點按<b>「檢索」</b>進入搜尋模式、進行全文檢索詞搜尋並顯示結果；點按<b>「清除」</b>回到原本的對讀模式。</p>
 			</div>
 
 			<div class="text-center">
-				<img width="90%" src="images/3-2-5.jpeg">
+				<img width="90%" src="images/3-2-6.jpeg">
 			</div>
 		</div>
 
@@ -388,7 +401,7 @@
 				<p>本工具以文獻集 (corpus) 為單位，一份文獻集顯示為一獨立直欄，並包含以下內容：</p>
 				<ol>
 					<li><b>文本標題：</b>顯示文獻集名稱，右側 <i class="fa fa-folder-open" aria-hidden="true"></i> / <i class="fa fa-folder" aria-hidden="true"></i> 圖示可以 打開/關閉 文獻集的文件目錄。</li>
-					<li><b>文本目錄：</b>列出所有文件名稱，點選任一文件可以跳轉至該文件所在處。</li>
+					<li><b>文本目錄：</b>列出所有文件，點選任一文件可以跳轉至該文件所在處。</li>
 					<li><b>文本內容：</b>顯示每份文件，包含標題、詮釋資料、內文三種類型的區塊。</li>
 				</ol>
 				<ul class="notice">
@@ -397,14 +410,14 @@
 			</div>
 
 			<div class="text-center">
-				<img width="90%" src="images/3-3.jpeg">
+				<img width="90%" src="images/3-3.png">
 			</div>
 		</div>
 
 		<div class="multi-col" data-key="3-3-1" style="grid-template-columns: 1fr 1fr;">
 			<div>
 				<h6><b>3-3-1 標題區塊</b></h6>
-				<p>顯示文件檔名，以標示一份文件的開始。鼠標滑過會顯示目前文件間對讀依據的值 (Metadata Value)，點擊可觸發以下功能：</p>
+				<p>顯示「文件檔名」或者「文件標題」，以標示一份文件的開始。鼠標滑過會顯示目前文件間對讀依據的值 (Metadata Value)，點擊可觸發以下功能：</p>
 				<ul>
 					<li><b>右側 <i class="fa fa-angle-double-down" aria-hidden="true"></i> / <i class="fa fa-angle-double-up" aria-hidden="true"></i> 圖示：</b>打開/關閉 本文件的詮釋資料區塊。</li>
 					<li><b>區塊其餘部分：</b><span class="link" data-to="4">文件間對讀</span>。</li>
@@ -423,7 +436,7 @@
 			</div>
 
 			<div class="text-center">
-				<img width="90%" src="images/3-3-2.jpeg">
+				<img width="90%" src="images/3-3-2.png">
 			</div>
 		</div>
 
@@ -453,6 +466,10 @@
 					<li><b style="color: indianred;">紅色：</b>正在閱讀的區塊，點按該區塊將尋找其他文本的下一個閱讀目標。</li>
 				</ul>
 			</div>
+
+			<div class="text-center">
+				<img width="90%" src="images/4.png">
+			</div>
 		</div>
 	</div>
 
@@ -467,14 +484,14 @@
 			</div>
 
 			<div class="text-center">
-				<img width="90%" src="images/5.jpeg">
+				<img width="90%" src="images/5.png">
 			</div>
 		</div>
 
 		<div class="multi-col" data-key="5-1" style="grid-template-columns: 1fr 1fr;">
 			<div>
 				<h5>5-1 目錄</h5>
-				<p>列出所有包含檢索詞的文件檔名，與其內包含的檢索詞數量，點按任一文件可以跳轉至該文件所在處。</p>
+				<p>列出所有包含檢索詞的文件，與其內包含的檢索詞數量，點按任一文件可以跳轉至該文件所在處。</p>
 			</div>
 
 			<div class="text-center">
@@ -485,11 +502,11 @@
 		<div class="multi-col" data-key="5-2" style="grid-template-columns: 1fr 1fr;">
 			<div>
 				<h5>5-2 統計數據</h5>
-				<p>原本的詮釋資料區塊用作顯示每份文件的檢索統計數據，包含文件的檢索詞數量、含檢索詞的段落數量。</p>
+				<p>原本的詮釋資料區塊用作顯示每份文件的檢索統計數據，包含檢索詞數量、含檢索詞的段落數量。</p>
 			</div>
 
 			<div class="text-center">
-				<img width="90%" src="images/5-2.jpeg">
+				<img width="90%" src="images/5-2.png">
 			</div>
 		</div>
 

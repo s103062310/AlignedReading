@@ -1,5 +1,5 @@
 const _zh = {
-  title: '文本對讀系統',
+  title: '文本對讀工具',
   navMenu: '選單',
   navReset: '清除對讀',
   navReadme: '使用說明',
