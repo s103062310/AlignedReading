@@ -647,7 +647,7 @@ class Main {
 			$(this.ui).find('.meta-row.table-warning').removeClass('table-warning');
 			$(this.ui).find(`.meta-row[key="${ name }"]`).addClass('table-warning');
 			$.each(this.corpora, function() {
-				this.contentUI.setMetaTooltip();
+				this.contentUI.setMetaTooltip(name);
 			});
 		}
 	}
