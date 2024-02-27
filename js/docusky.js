@@ -9,7 +9,7 @@ class DocuSky {
 	// apiPath: string, path of api
 	// controlObj: object, related UI after receiving response from docusky api [ui ID: ui controller(self-defined)]
 	constructor() {
-		this.apiPath = '../../webApi/';
+		this.apiPath = 'https://docusky.org.tw/DocuSky/webApi/';
 		this.controlObj = {};
 	}
 

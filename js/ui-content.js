@@ -30,7 +30,7 @@ class Directory {
 		var me = this;
 
 		// display
-		$(this.ui).append(`<div class="dir-item">└ <span>${ text }</span></div>`);
+		$(this.ui).append(`<div class="dir-item">└<span class="dir-name">${ text }</span></div>`);
 
 		// onclick
 		$(this.ui).children().last().click(function() {
@@ -45,23 +45,25 @@ class TitleBlock {
 
 	// ui: DOM, UI of title block
 	// parent: class Content, who creates this
-	constructor(parent, filename, title, alignable, isAlign) {
+	constructor(parent, data, target, alignable, isAlign) {
 		this.ui = undefined;
 		this.parent = parent;
-		this.init(filename, title, alignable, isAlign);
+		this.data = data;
+		this.init(data, target, alignable, isAlign);
 	}
 
 	// initialization
-	// filename: string, name of a document
-	// title: string, title of this block
+	// data: object, data candidates of title
+	// target: object, targets of selection in menu
 	// alignable: bool, if this block can be aligned
 	// isAlign: bool, if this block is target of aligning
-	init(filename, title, alignable, isAlign) {
+	init(data, target, alignable, isAlign) {
 		var me = this;
+		const { metadata, titleDisplay } = target
 
 		// html
-		var html = `<div class="title-block${ (alignable) ?' alignable' :'' }${ (isAlign) ?' target': '' }"${ (alignable) ?' data-toggle="tooltip" data-placement="top" data-original-title=""' :''}>
-						<span class="title-text${ (alignable) ?' align-btn' :'' }">${ title }</span>
+		var html = `<div class="title-block${ (alignable) ?' alignable' :'' }${ (isAlign) ?' target': '' }"${ (alignable) ?` data-toggle="tooltip" data-placement="top" data-original-title="${ data[metadata] }"` :''}>
+						<span class="title-text${ (alignable) ?' align-btn' :'' }">${ data[titleDisplay] }</span>
 						<span class="meta-btn">
 							<i class="fa fa-angle-double-up" aria-hidden="true"></i>
 							<i class="fa fa-angle-double-down" aria-hidden="true"></i>
@@ -76,14 +78,14 @@ class TitleBlock {
 		$(this.ui).find('.align-btn').click(function(event) {
 			me.parent.parent.align({
 				mode: 'doc',
-				filename,
+				filename: data['檔名'],
 				clicked: $(event.target).closest('.title-block')
 			});
 		});
 
 		// onclick - toggle metadata block
 		$(this.ui).find('.meta-btn').click(function() {
-			me.parent.toggleMeta(filename);
+			me.parent.toggleMeta(data['檔名']);
 		});
 	}
 
@@ -121,26 +123,27 @@ class MetaBlock {
 
 		// metadata table
 		for (let name in metadata) {
-			let value = (linkMeta[name] !== undefined) ?`<a href="${ linkMeta[name] }" target="_blank">${ metadata[name] }</a>`
-													   :metadata[name];
-			table += `<tr key="${ name }">
-						<th scope="row">${ name }</th>
-						<td>${ value }</td>
-					</tr>`;
+			let value = (linkMeta[name] !== undefined) 
+				? `<a href="${ linkMeta[name] }" target="_blank">${ metadata[name] }</a>`
+				: metadata[name];
+			table += `<div class="meta-row" key="${ name }">
+						<span class="meta-name">${ name }</span>
+						<span>${ value }</span>
+					</div>`;
 		}
 
 		// html
 		var html = `<div class="meta-block" style="display: none;">
-						<table class="table table-bordered table-sm">
-							<tbody>${ table }</tbody>
-						</table>
+						<div class="meta-table">
+							${ table }
+						</div>
 					</div>`;
 
 		// display
 		this.ui = this.parent.addBlock(html);
 
 		// activate target metadata
-		$(this.ui).find(`tr[key="${ target }"]`).addClass('table-warning');
+		$(this.ui).find(`.meta-row[key="${ target }"]`).addClass('table-warning');
 	}
 
 	// delete this block
@@ -329,12 +332,8 @@ class Content {
 			return;
 		}
 
-		// title
-		const targetTitle = target.titleDisplay
-		const title = targetTitle === '檔名' ? filename : data.metadata[targetTitle]
-
 		// functions
-		var addTitleBlock = function() { me.titleBlocks[filename] = new TitleBlock(me, filename, title, alignable, isAlign); };
+		var addTitleBlock = function() { me.titleBlocks[filename] = new TitleBlock(me, data.metadata || data.title, target, alignable, isAlign); };
 		var addMetaBlock = function() { me.metaBlocks[filename] = new MetaBlock(me, data.metadata, linkMeta, targetMeta); };
 
 		// create file container
@@ -380,11 +379,11 @@ class Content {
 	}
 
 	// activate bootstrap tooltip
-	setMetaTooltip() {
-		$(this.ui).find('.title-block').each(function() {
-			let value = $(this).next().find('.table-warning td').html();
-			$(this).attr('data-original-title', value);
-		});
+	// name: string, active metadata name
+	setMetaTooltip(name) {
+		$.each(this.titleBlocks, function() {
+			$(this.ui).attr('data-original-title', this.data[name])
+		})
 	}
 
 	// * * * * * * * * * * * * * * * * interaction * * * * * * * * * * * * * * * * *

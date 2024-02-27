@@ -183,8 +183,8 @@ class MyDocument {
 				// add new block information to temp
 				temp[type].text = '';
 				temp[type].Key.push(tagInfo.Key);
-				if (tagInfo.RefId) temp[type].RefId = temp[type].RefId.concat(tagInfo.RefId.split(/[\s;]+/));
-				if (tagInfo.Term) temp[type].Term = temp[type].Term.concat(tagInfo.Term.split(/[\s;]+/));
+				if (tagInfo.RefId) temp[type].RefId = temp[type].RefId.concat(tagInfo.RefId.split(/;/).map(v => v.trim()).filter(v => Boolean(v)));
+				if (tagInfo.Term) temp[type].Term = temp[type].Term.concat(tagInfo.Term.split(/;/).map(v => v.trim()).filter(v => Boolean(v)));
 
 				// record key
 				map[tagInfo.Key] = type;

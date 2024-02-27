@@ -1,24 +1,30 @@
 @font-face {
 	font-family: apple-2;
-	src: url("../../../fonts/apple/apple-zh-2.eot"),
-		 url("../../../fonts/apple/apple-zh-2.woff") format("woff"),
-		 url("../../../fonts/apple/apple-zh-2.ttf") format("truetype");
+	src: url("https://docusky.org.tw/DocuSky/fonts/apple/apple-zh-2.eot"),
+		 url("https://docusky.org.tw/DocuSky/fonts/apple/apple-zh-2.woff") format("woff"),
+		 url("https://docusky.org.tw/DocuSky/fonts/apple/apple-zh-2.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: apple-3;
-	src: url("../../../fonts/apple/apple-zh-3.eot"),
-		 url("../../../fonts/apple/apple-zh-3.woff") format("woff"),
-		 url("../../../fonts/apple/apple-zh-3.ttf") format("truetype");
+	src: url("https://docusky.org.tw/DocuSky/fonts/apple/apple-zh-3.eot"),
+		 url("https://docusky.org.tw/DocuSky/fonts/apple/apple-zh-3.woff") format("woff"),
+		 url("https://docusky.org.tw/DocuSky/fonts/apple/apple-zh-3.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+}
+
+html {
+	font-size: 16px;
 }
 
 body {
 	font-family: apple-2!important;
 	word-break: break-word;
+	display: flex;
+	height: 100vh;
 }
 
 .bold {
@@ -38,7 +44,7 @@ i,
 }
 
 i:hover {
-	font-size: 1.3rem!important;
+	font-size: 1.25rem!important;
 	cursor: pointer;
 }
 
@@ -60,27 +66,34 @@ header {
 	left: 0;
 	right: 0;
 	top: 0;
-	height: 5vh;
-	display: grid!important;
-	grid-template-columns: 5vh 5vh auto 5vh 5vh 5vh;
-	color: white;
-	background-color: #49525A;
-	box-shadow: 0 1px 3px rgba(0,0,0,.5);
-	font-size: 3vh;
+	height: 3rem;
+	display: flex;
+	color: var(--color--white);
+	background-color: var(--color--gray-darker);
+	box-shadow: 0 0 8px var(--color--shadow);
+	font-size: 1.5rem;
 	text-align: center;
 	z-index: 10;
+	border-bottom: 1px solid var(--color--gray-light);
 }
 
-header span {
-	height: 100%;
-	position: relative;
-	display: grid;
+.header-title {
+	flex-grow: 1;
+	display: flex;
 	align-items: center;
+	justify-content: center;
+}
+
+.header-btn {
+	width: 3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .header-btn:hover {
-	color: #49525A;
-	background-color: white;
+	color: var(--color--gray-darker);
+	background-color: var(--color--white);
 	cursor: pointer;
 }
 
@@ -91,28 +104,60 @@ header span {
 .tooltip-box {
 	display: none;
 	position: absolute;
-	top: 6vh;
+	top: 2.625rem;
 	width: max-content;
 	height: max-content;
-	background: rgba(0,0,0,.75);
-	border-radius: 5px;
+	background: var(--color--tooltip);
+	border-radius: 0.25rem;
 }
 
 .tooltip-text {
 	display: grid;
-	margin: 1vh;
-	font-size: 2vh;
-	color: white;
+	margin: 0.375rem;
+	font-size: 0.875rem;
+	color: var(--color--white);
 }
 
 .arrow-t {
 	position: absolute;
 	top: -10px;
+	left: 50%;
 	width: 0px;
 	height: 0px;
 	border-width: 5px;
 	border-style: solid;
-	border-color: transparent transparent rgba(0,0,0,.75) transparent;
+	border-color: transparent transparent var(--color--tooltip) transparent;
+	transform: translateX(-50%);
+}
+
+.lang-selector {
+	position: absolute;
+	top: 0;
+	margin-top: 3rem;
+	width: 6.25rem;
+	padding: 0.25rem 0;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	font-size: 0.875rem;
+	background-color: var(--color--gray-darker);
+	border: 1px solid var(--color--gray-light);
+	border-top: 0;
+	border-radius: 0.25rem;
+	box-shadow: 0 0 8px var(--color--shadow);
+}
+
+.lang-selector.hide {
+	display: none;
+}
+
+.lang-item {
+	padding: 0.25rem 0;
+	color: var(--color--white);
+}
+
+.lang-item:hover {
+	background-color: var(--color--gray-dark);
 }
 
 /* ----- EXPLAIN ----- */
@@ -126,18 +171,18 @@ header span {
 .explain-dir {
 	display: flex;
 	flex-direction: column;
-	border-radius: 5px;
-	box-shadow: 1px 0 5px rgba(0,0,0,.5);
+	border-radius: 0.375rem;
+	box-shadow: 0 0 8px var(--color--shadow);
 	overflow-y: scroll;
 }
 
 .explain-dir-item {
 	padding: 0.5rem;
-	border-bottom: 1px solid gainsboro;
+	border-bottom: 1px solid var(--color--gray-lighter);
 }
 
 .explain-dir-item:hover {
-	background-color: #EFF3F7;
+	background-color: var(--color--blue-lighter);
 	cursor: pointer;
 }
 
@@ -165,7 +210,7 @@ header span {
 	margin: 1rem;
 	padding: 1rem 1rem 1rem 40px;
 	list-style-type: cambodian;
-	background-color: rgba(0,0,0,.05);
+	background-color: var(--color--gray-lighter);
 	border-radius: 5px;
 }
 

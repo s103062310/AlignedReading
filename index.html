@@ -9,15 +9,16 @@
 	<!-- link information -->
 	<meta property="og:title" content="文本對讀工具"/>
 	<meta property="og:description" content="這是個將數個 DocuXml 中的文件，依照特定的標記或 metadata（如：年代、日期或對讀標記）對齊排列，方便對讀的工具。"/>
+	<meta property="description" content="這是個將數個 DocuXml 中的文件，依照特定的標記或 metadata（如：年代、日期或對讀標記）對齊排列，方便對讀的工具。"/>
 	<meta property="og:image" content="images/cover.jpeg"/>
 
 	<!-- browser tab -->
-	<link rel="icon" href="../../images/logo/icon.png">
+	<link rel="icon" href="https://docusky.org.tw/DocuSky/images/logo/icon.png">
 	<title>文本對讀工具</title>	
 
 	<!-- assets -->
-	<script src="../../packages/jquery/v.2.2.4/jquery.min.js"></script>
-	<script src="../../packages/self-defined/docuxml.js"></script>
+	<script src="https://docusky.org.tw/DocuSky/packages/jquery/v.2.2.4/jquery.min.js"></script>
+	<script src="https://docusky.org.tw/DocuSky/packages/self-defined/docuxml.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
@@ -25,13 +26,14 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+	<link href="css/colors.css" type="text/css" rel="stylesheet">
 	<link href="css/body.css" type="text/css" rel="stylesheet">
 	<link href="css/aside.css" type="text/css" rel="stylesheet">
 	<link href="css/main.css" type="text/css" rel="stylesheet">
 
 	<!-- google analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109249169-1"></script>
-	<script src="../../packages/self-defined/googleAnalytics.js"></script>
+	<script src="https://docusky.org.tw/DocuSky/packages/self-defined/googleAnalytics.js"></script>
 
 </head>
 
@@ -41,8 +43,8 @@
 	<header>
 		<span id="menu" class="header-btn">
 			<i class="fa fa-bars" aria-hidden="true"></i>
-			<span class="tooltip-box" style="left: 1vh">
-				<span class="arrow-t" style="left: 1vh"></span>
+			<span class="tooltip-box" style="left: 6px">
+				<span class="arrow-t"></span>
 				<span class="tooltip-text">選單</span>
 			</span>
 		</span>
@@ -50,40 +52,52 @@
 		<span id="reset" class="header-btn">
 			<i class="fa fa-refresh" aria-hidden="true"></i>
 			<span class="tooltip-box">
-				<span class="arrow-t" style="left: 2vh"></span>
+				<span class="arrow-t"></span>
 				<span class="tooltip-text">清除對讀</span>
 			</span>
 		</span>
 
-		<span class="bold" style="margin-left: 5vh;">文本對讀工具</span>
+		<span class="header-title bold">文本對讀工具</span>
+
+		<span class="header-btn" 
+			onmouseenter="$('.lang-selector').removeClass('hide')"
+			onmouseleave="$('.lang-selector').addClass('hide')"
+			onclick="$('.lang-selector').toggleClass('hide')"
+		>
+			<i class="fa fa-language" aria-hidden="true"></i>
+			<span class="lang-selector hide">
+				<span class="lang-item" onclick="switchLanguage('zh')">中文</span>
+				<span class="lang-item" onclick="switchLanguage('en')">English</span>
+			</span>
+		</span>
 
 		<span class="header-btn" data-toggle="modal" data-target="#explain">
 			<i class="fa fa-question-circle" aria-hidden="true"></i>
 			<span class="tooltip-box">
-				<span class="arrow-t" style="left: 2vh"></span>
+				<span class="arrow-t"></span>
 				<span class="tooltip-text">使用說明</span>
 			</span>
 		</span>
 
-		<span class="header-btn" onclick="window.open('../../docuTools/userMain/')">
+		<span class="header-btn" onclick="window.open('https:\/\/docusky.org.tw/DocuSky/docuTools/userMain/')">
 			<i class="fa fa-cloud" aria-hidden="true"></i>
-			<span class="tooltip-box" style="left: -3vh;">
-				<span class="arrow-t" style="left: 5vh"></span>
+			<span class="tooltip-box">
+				<span class="arrow-t"></span>
 				<span class="tooltip-text">我的資料庫</span>
 			</span>
 		</span>
 
-		<span class="header-btn" onclick="window.open('../../ds-01.home.html')">
+		<span class="header-btn" onclick="window.open('https:\/\/docusky.org.tw/DocuSky/home/')">
 			<i class="fa fa-home" aria-hidden="true"></i>
-			<span class="tooltip-box" style="right: 0;">
-				<span class="arrow-t" style="right: 2vh"></span>
+			<span class="tooltip-box" style="right: 6px">
+				<span class="arrow-t"></span>
 				<span class="tooltip-text">回首頁</span>
 			</span>
 		</span>
 	</header>
 
 	<!-- control board -->
-	<aside style="display: flex;">
+	<aside class="open">
 		<div class="control-item">
 			<div class="control-item-title bold">載入資料</div>
 			<div id="load" class="control-item-content">
@@ -116,9 +130,17 @@
 		<div class="control-item">
 			<div class="control-item-title bold">全文檢索</div>
 			<div id="search" class="control-item-content">
-				<input id="search-query" type="text" class="form-control" style="grid-area: input;">
-				<button id="search-btn" class="btn btn-dark" style="grid-area: search;"><i class="fa fa-search" aria-hidden="true"></i> 檢索</button>
-				<button id="search-reset" class="btn btn-dark" style="grid-area: reset;"><i class="fa fa-refresh" aria-hidden="true"></i> 清除</button>
+				<input id="search-query" type="text" class="form-control">
+				<div class="search-btn-group">
+					<button id="search-btn" class="btn btn-dark">
+						<i class="fa fa-search" aria-hidden="true"></i>
+						<span>檢索</span>
+					</button>
+					<button id="search-reset" class="btn btn-dark">
+						<i class="fa fa-refresh" aria-hidden="true"></i>
+						<span>清除</span>
+					</button>
+				</div>
 			</div>
 		</div>
 	</aside>
@@ -143,7 +165,7 @@
 					</div>
 					<div class="form-group">
 						<label for="password" class="col-form-label bold">密碼</label>
-						<input id="password" type="password" class="form-control" placeholder="Password"></input>
+						<input id="password" type="password" class="form-control" placeholder="Password">
 					</div>
 				</div>
 				<div class="modal-footer" style="justify-content: space-between;">
@@ -199,6 +221,9 @@
 	</div>
 
 	<!-- js file -->
+	<script src="js/language/zh.js"></script>
+	<script src="js/language/en.js"></script>
+	<script src="js/language/main.js"></script>
 	<script src="js/data.js"></script>
 	<script src="js/docusky.js"></script>
 	<script src="js/ui-content.js"></script>

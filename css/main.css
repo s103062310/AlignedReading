@@ -1,80 +1,88 @@
 /* ----- MAIN ----- */
 
 main {
-	position: fixed;
-	top: 5vh;
-	bottom: 0;
-	left: 20vw;
-	right: 0;
-	display: grid!important;
+	width: fit-content;
+	display: grid;
+	padding-top: 3rem;
+	flex-grow: 1;
+	grid-gap: 0.375rem;
 }
 
 .corpus-col {
-	border: 3px solid #4F667D;
-	border-bottom: none;
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 3rem);
 }
 
 .corpus-title {
 	padding: 0.5rem;
-	display: grid;
-	grid-template-columns: auto 2.5rem;
+	display: flex;
 	align-items: center;
-	color: white;
-	background-color: #4F667D;
+	color: var(--color--white);
 	text-align: center;
 	font-size: 1.5rem;
 }
 
+.corpus-name {
+	flex-grow: 1;
+}
+
+.dir-btn {
+	width: 2rem;
+}
+
 .corpus-dir {
-	max-height: 40vh;
-	padding: 1rem;
-	display: grid;
+	flex-shrink: 0;
+	max-height: 20rem;
+	padding: 0.375rem;
+	margin-bottom: 0.375rem;
 	overflow-y: scroll;
-	border-bottom: 5px solid #4F667D;
-}
-
-.corpus-dir > div {
-	margin: 2.5px 0;
-}
-
-.corpus-dir > div > span {
-	padding: 3px 8px;
-	border-radius: 5px;
-}
-
-.corpus-dir > div > span:hover {
-	background-color: #EFF3F7;
-	cursor: pointer;
+	background-color: var(--color--white);
 }
 
 .dir-item {
-	display: grid;
-	grid-template-columns: 1rem auto;
+	display: flex;
 	align-items: center;
 }
 
-.corpus-content {
+.dir-name {
+	margin-left: 0.375rem;
 	padding: 0.25rem;
+	border-radius: 0.25rem;
+	flex-grow: 1;
+}
+
+.dir-name:hover {
+	background-color: var(--color--blue-lighter);
+	cursor: pointer;
+}
+
+.corpus-content {
+	padding: 0.375rem;
 	overflow-y: scroll;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	grid-gap: 0.25rem;
+	background-color: var(--color--white);
 }
 
 /* ----- TITLE BLOCK ----- */
 
 .title-block {
-	margin: 0.25rem;
 	padding: 0.25rem;
 	display: grid;
 	grid-template-columns: auto 2rem;
 	align-items: center;
-	color: white;
-	background-color: #667E95;
-	font-size: 1.2rem;
+	color: var(--color--white);
+	background-color: var(--color--blue-dark);
+	font-size: 1.125rem;
 	text-align: center;
-	border-radius: 5px;
+	border-radius: 0.25rem;
 }
 
 .title-block.alignable:hover {
-	background-color: #5B7289;
+	background-color: var(--color--blue-darker);
 	cursor: pointer;
 }
 
@@ -102,40 +110,43 @@ main {
 /* ----- META BLOCK ----- */
 
 .meta-block {
-	margin: 0.25rem;
 	padding: 0.5rem;
-	background-color: #CAD7E3;
-	border-radius: 5px;
+	background-color: var(--color--blue);
+	border-radius: 0.25rem;
 }
 
-.meta-block .table {
-	margin: 0;
+.meta-table {
+	display: flex;
+	flex-direction: column;
 }
 
-.meta-block tr th,
-.meta-block tr td {
-	border: 1px solid #667E95;
-	vertical-align: middle;
+.meta-row {
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.25rem;
+}
+
+.meta-name {
+	padding: 0.125rem;
+	border-radius: 0.25rem;
+	color: var(--color--white);
+	background-color: var(--color--blue-dark);
 }
 
 /* ----- TEXT BLOCK ----- */
 
 .text-block {
-	margin: 5px;
 	padding: 0.5rem;
-	display: grid;
-	grid-row-gap: 5px;
-	background-color: #EFF3F7;
-	border-radius: 5px;
+	background-color: var(--color--blue-lighter);
+	border-radius: 0.25rem;
 }
 
 .text-block.alignable:hover {
-	background-color: #DFE7EE;
+	background-color: var(--color--blue-light);
 	cursor: pointer;
 }
 
 .text-block.highlight {
-	color: white;
+	color: var(--color--white);
 }
 
 .text-block.target {
@@ -156,18 +167,22 @@ main {
 	cursor: pointer;
 }
 
+.term-in-text {
+	margin-bottom: 0.25rem;
+}
+
 .term-in-text span {
-	padding: 0 5px;
-	margin-right: 5px;
+	padding: 0.125rem 0.375rem;
+	border-radius: 0.25rem;
 }
 
 .searched {
-	margin: 3px;
-	padding: 0 3px;
-	color: white;
+	margin: 0.125rem;
+	padding: 0.125rem;
+	color: var(--color--white);
 	background-color: indianred;
 	font-weight: bold;
-	border-radius: 5px;
+	border-radius: 0.25rem;
 }
 
 /* ----- VISIBILITY ----- */
@@ -180,10 +195,13 @@ i.fa-angle-double-up,
 	display: none;
 }
 
-.corpus-col.target,
 .dir-btn.open i.fa-folder,
 .dir-btn i.fa-folder-open,
 .open i.fa-angle-double-up,
 i.fa-angle-double-down {
 	display: block;
+}
+
+.corpus-col.target {
+	display: flex;
 }

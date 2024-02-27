@@ -102,9 +102,6 @@ class Corpus {
 		// remove empty page
 		if (this.pages.last().length <= 0) this.pages.pop();
 
-		// adjust height of content block
-		this.adjustHeight(true);
-
 		// display default page
 		this.nowPage = [0, 1, 2];
 		this.displayAllPage();
@@ -124,17 +121,6 @@ class Corpus {
 
 	// * * * * * * * * * * * * * * * * directory * * * * * * * * * * * * * * * * *
 
-	// re-calculate height of content ui when toggle directory block
-	// open: bool, now status of directory block
-	adjustHeight(open) {
-		var getHeight = function(selector) { return parseInt($(selector).css('height').replace('px', '')); };
-		var mainH = getHeight($('aside'));
-		var titleH = getHeight($(this.ui).find('.corpus-title'));
-		var dirH = (open) ?0 :getHeight(this.dirUI.ui);
-		var height = mainH - titleH - dirH;
-		$(this.contentUI.ui).css('height', `${ height }px`);
-	}
-
 	// toggle ui of directory block of this corpus
 	// span: DOM, ui of toggle-dir-btn
 	toggleDir(span) {
@@ -145,9 +131,7 @@ class Corpus {
 		$(span).toggleClass('open');
 
 		// dir block
-		if (open) this.adjustHeight(open);
 		this.dirUI.toggle();
-		if (!open) setTimeout(function() { me.adjustHeight(open); }, 300);	
 	}
 
 	// check if block is in window now and then jump
@@ -469,6 +453,8 @@ class Corpus {
 	// search blocks that contain query in this corpus
 	// query: string, search target
 	search(query) {
+		if (query === '') return
+
 		var re = new RegExp(query, 'g');
 		var aligntype = this.parent.target.aligntype;
 
@@ -514,13 +500,18 @@ class Corpus {
 			if (result.length > 0) {
 
 				// record result
+				const getText = getTextFunc(_lang)
 				this.searchPages.last().push(filename);
 				this.searchResult[filename] = {
 					content: result,
 					page: this.searchPages.length-1,
 					metadata: {
-						'檢索詞總數': matchNum,
-						'含檢索詞段落數': result.length
+						[getText('searchCount')]: matchNum,
+						[getText('searchParagraphCount')]: result.length
+					},
+					title: {
+						'檔名': filename,
+						'文件標題': this.documents[filename].metadata['文件標題'],
 					}
 				}
 
@@ -627,6 +618,9 @@ class Main {
 		this.activateAligntype(target.aligntype);
 		this.activateTitleDisplay(target.titleDisplay);
 		delete this.corpora[name];
+		if (Object.keys(this.corpora).length === 0) {
+			$('body').css('background-color', '');
+		}
 	}
 
 	// * * * * * * * * * * * * * * * * interaction * * * * * * * * * * * * * * * * *
@@ -650,10 +644,10 @@ class Main {
 	activateMetadata(name) {
 		this.target.metadata = name;
 		if (this.mode === 'align') {
-			$(this.ui).find('tr.table-warning').removeClass('table-warning');
-			$(this.ui).find(`tr[key="${ name }"]`).addClass('table-warning');
+			$(this.ui).find('.meta-row.table-warning').removeClass('table-warning');
+			$(this.ui).find(`.meta-row[key="${ name }"]`).addClass('table-warning');
 			$.each(this.corpora, function() {
-				this.contentUI.setMetaTooltip();
+				this.contentUI.setMetaTooltip(name);
 			});
 		}
 	}
@@ -722,6 +716,7 @@ class Main {
 	setColumn() {
 		var visibleCount = $(this.ui).find('.corpus-col.target').length;
 		$(this.ui).css('grid-template-columns', `repeat(${ visibleCount }, 1fr)`);
+		$('body').css('background-color', 'var(--color--blue-darker)');
 	}
 }
 

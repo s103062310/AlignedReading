@@ -6,12 +6,8 @@
 // controller of the whole ui
 class UI {
 
-	// constB: int, constant that used to calculate boundary
-	// boundary: int, boundary of aside and main (left 0-100 right)
 	// corporaRecord: object, count number of each corpus name, used to generate unique corpus id [corpusname: number(int)]
 	constructor() {
-		this.constB = 20;
-		this.boundary = 20;
 		this.corporaRecord = {};
 		
 		// UI
@@ -101,18 +97,7 @@ class UI {
 
 	// toggle aside
 	toggle() {
-		this.boundary = this.constB - this.boundary;
-
-		// aside
-		$('aside').animate({
-			left: `${ this.boundary - this.constB }vw`, 
-			right: `${ 100 - this.boundary }vw`
-		}, 'fast');
-
-		// main
-		$('main').animate({
-			left: `${ this.boundary }vw`
-		}, 'fast');
+		$('aside').toggleClass('open')
 	}
 
 	// toggle visualization of a corpus
@@ -152,6 +137,8 @@ class UI {
 var _ui = new UI();
 var _docusky = new DocuSky();		// docusky.js
 var _parser = new DocuxmlParser();	// docuxmlParser.js
+const _legalLang = { zh: 'zh', en: 'en' }
+let _lang = 'zh'
 
 // parse url parameter
 const { searchParams } = new URL(location.href)
@@ -160,7 +147,6 @@ const _query = Object.fromEntries([...searchParams.entries()].map(
 		const parsedValue = key === 'corpus' ? value.split(',') : value
 		return [key, parsedValue]
 	})))
-
 
 
 // google analytics
@@ -204,6 +190,9 @@ $(document).ready(function() {
 			jumpTo($(event.target).attr('data-to'));
 		});
 	});
+
+	// language
+	switchLanguage(_legalLang[_query['l']] || 'zh')
 
 	// auto load open db
 	if (_query.db && _query.corpus) {

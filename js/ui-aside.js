@@ -112,10 +112,11 @@ class CorpusList {
 		});
 
 		// UI
-		$('#corpus-list-label').html(isUserDB ? '我的資料庫' : '公開資料庫')
-		$('#account-btn').html(this.isLogin ? '登出' : '登入')
+		const getText = getTextFunc(_lang)
+		$('#corpus-list-label').html(isUserDB ? getText('corpusTitlePersonal') : getText('corpusTitlePublic'))
+		$('#account-btn').html(this.isLogin ? getText('corpusLogoutBtn') : getText('corpusLoginBtn'))
 		$('#account-btn').click(this.isLogin ? this.logoutFunc : this.loginFunc)
-		$('#switch-db-btn').html(isUserDB ? '公開資料庫' : '我的資料庫')
+		$('#switch-db-btn').html(isUserDB ? getText('corpusPublicBtn') : getText('corpusMyBtn'))
 		$('#switch-db-btn').attr('data-target', isUserDB ? 'OPEN' : 'USER')
 		$('#switch-db-btn').css('display', this.isLogin ? 'inline-block' : 'none')
 		this.modal('show')
@@ -125,7 +126,7 @@ class CorpusList {
 		this.isLogin = false
 		if (this.target === "USER") this.modal('hide')
 		else {
-			$('#account-btn').html('登入')
+			$('#account-btn').html(getText('corpusLoginBtn'))
 			$('#account-btn').click(this.loginFunc)
 			$('#switch-db-btn').css('display', 'none')
 		}
@@ -189,14 +190,14 @@ class Manage {
 
 		// display
 		$(this.ui).append(
-			`<div class="manage-corpus target" key="${ name }">
-				<span>◆ </span>
-				<span>${ name }</span>
-				<span class="manage-corpus-eye">
+			`<div class="setting target" key="${ name }">
+				<span class="setting-child">◆</span>
+				<span class="setting-long-child">${ name }</span>
+				<span class="setting-child setting-eye">
 					<i class="fa fa-eye" aria-hidden="true"></i>
 					<i class="fa fa-eye-slash" aria-hidden="true"></i>
 				</span>
-				<i class="fa fa-trash manage-corpus-trash" aria-hidden="true"></i>
+				<i class="fa fa-trash setting-child setting-trash" aria-hidden="true"></i>
 			</div>`
 		);
 
@@ -205,12 +206,12 @@ class Manage {
 		this.entries[name] = target;
 
 		// onclick - eye icon: toggle corpus
-		$(target).find('.manage-corpus-eye').click(function() {
+		$(target).find('.setting-eye').click(function() {
 			me.parent.toggleCorpus(name);
 		});
 
 		// onclick - trash icon: delete corpus
-		$(target).find('.manage-corpus-trash').click(function() {
+		$(target).find('.setting-trash').click(function() {
 			me.parent.deleteCorpus(name);
 		});
 	}
@@ -295,9 +296,9 @@ class Setting {
 		Object.keys(this.list).forEach(item => {
 			$(this.ui).append(
 				`<div class="setting${ (item === this.target) ?' target' :'' }" key="${ item }">
-					<span>◆ </span>
-					<span>${ item }</span>
-					<span class="setting-toggle">
+					<span class="setting-child">◆</span>
+					<span class="setting-long-child">${ item }</span>
+					<span class="setting-child setting-toggle">
 						<i class="fa fa-toggle-on" aria-hidden="true"></i>
 						<i class="fa fa-toggle-off" aria-hidden="true"></i>
 					</span>
