@@ -3,6 +3,9 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
+const REQUESTER = 'Aligned Reading Tool'
+
+
 // controller of docusky api communication
 class DocuSky {
 
@@ -34,7 +37,8 @@ class DocuSky {
 
 			data: {
 				dsUname: username,
-				dsPword: password
+				dsPword: password,
+				requester: REQUESTER,
 			},
 
 			success: function(response) {
@@ -60,6 +64,8 @@ class DocuSky {
 			dataType: 'json',
 			url: me.apiPath + 'userLogoutJson.php',
 
+			data: { requester: REQUESTER },
+
 			success: function(response) {
 				if (response.code == 0) me.controlObj.corpusList.logout();		// logout success
 				else alert(response.message);										// logout fail
@@ -81,7 +87,7 @@ class DocuSky {
 			dataType: 'json',
 			url: this.apiPath + 'getDbCorpusListJson.php',
 
-			data: { target: target },
+			data: { target, requester: REQUESTER },
 
 			success: function(response) {
 				if (response.code == 101) me.controlObj.login.modal('show');								// require login
@@ -105,7 +111,7 @@ class DocuSky {
 			dataType: 'json',
 			url: this.apiPath + 'getDbCorpusListJson.php',
 
-			data: { target: target },
+			data: { target, requester: REQUESTER },
 
 			success: function(response) { // require login
 				if (response.code == 101) me.controlObj.login.modal('show');	
@@ -152,7 +158,8 @@ class DocuSky {
 				corpus: param.corpus,
 				query: '.all',
 				page: page,
-				pageSize: 200
+				pageSize: 200,
+				requester: REQUESTER,
 			},
 
 			success: function(response) {
