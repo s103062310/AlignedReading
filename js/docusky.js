@@ -95,6 +95,33 @@ class DocuSky {
 		});
 	}
 
+	// get user's corpus list on docusky for specific db
+	getDbCorpus(target, db) {
+		var me = this;
+
+		// corpus list api
+		$.ajax({
+			type: 'GET',
+			dataType: 'json',
+			url: this.apiPath + 'getDbCorpusListJson.php',
+
+			data: { target: target },
+
+			success: function(response) { // require login
+				if (response.code == 101) me.controlObj.login.modal('show');	
+				else if (response.code == 0) { // success
+					response.message
+						.filter(corpus => corpus.db === db && corpus.corpus !== '[ALL]')
+						.forEach(({ corpus }) => getDataFromDocusky({ target, db, corpus }))
+				} else alert(response.message); // fail
+			},
+
+			error: function(response) {
+				alert(response.message);
+			}
+		});
+	}
+
 	// get data of selected corpus
 	// param: object, needed parameters when get data from api
 	getData(param) {
