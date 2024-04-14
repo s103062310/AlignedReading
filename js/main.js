@@ -195,14 +195,15 @@ $(document).ready(function() {
 	switchLanguage(_legalLang[_query['l']] || 'zh')
 
 	// auto load open db
-	if (_query.db && _query.corpus) {
-		_query.corpus.forEach(corpus => {
-			getDataFromDocusky({
-				target: 'OPEN',
-				db: _query.db,
-				corpus,
+	if (_query.db) {
+		const target = _query.target || 'OPEN'
+		if (_query.corpus) {
+			_query.corpus.forEach(corpus => {
+				getDataFromDocusky({ target, db: _query.db, corpus })
 			})
-		})
+		} else {
+			_docusky.getDbCorpus(target, _query.db)
+		}
 	}
 });
 

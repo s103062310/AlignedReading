@@ -56,6 +56,12 @@ Use branches to maintain different customized versions.
 
 ## Change Log
 
+### v3.4
+> 2024.04.14
+- add url parameter 'target' to access personal db on auto loading
+- url parameter 'corpus' accepts no input: load all corpus in db
+- add api requester parameter for statistics
+
 ### v3.3
 > 2024.02.24
 - add english version

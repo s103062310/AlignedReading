@@ -3,6 +3,9 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
+const REQUESTER = 'Aligned Reading Tool'
+
+
 // controller of docusky api communication
 class DocuSky {
 
@@ -34,7 +37,8 @@ class DocuSky {
 
 			data: {
 				dsUname: username,
-				dsPword: password
+				dsPword: password,
+				requester: REQUESTER,
 			},
 
 			success: function(response) {
@@ -60,6 +64,8 @@ class DocuSky {
 			dataType: 'json',
 			url: me.apiPath + 'userLogoutJson.php',
 
+			data: { requester: REQUESTER },
+
 			success: function(response) {
 				if (response.code == 0) me.controlObj.corpusList.logout();		// logout success
 				else alert(response.message);										// logout fail
@@ -81,12 +87,39 @@ class DocuSky {
 			dataType: 'json',
 			url: this.apiPath + 'getDbCorpusListJson.php',
 
-			data: { target: target },
+			data: { target, requester: REQUESTER },
 
 			success: function(response) {
 				if (response.code == 101) me.controlObj.login.modal('show');								// require login
 				else if (response.code == 0) me.controlObj.corpusList.display(target, response.message);	// success
 				else alert(response.message);																// fail
+			},
+
+			error: function(response) {
+				alert(response.message);
+			}
+		});
+	}
+
+	// get user's corpus list on docusky for specific db
+	getDbCorpus(target, db) {
+		var me = this;
+
+		// corpus list api
+		$.ajax({
+			type: 'GET',
+			dataType: 'json',
+			url: this.apiPath + 'getDbCorpusListJson.php',
+
+			data: { target, requester: REQUESTER },
+
+			success: function(response) { // require login
+				if (response.code == 101) me.controlObj.login.modal('show');	
+				else if (response.code == 0) { // success
+					response.message
+						.filter(corpus => corpus.db === db && corpus.corpus !== '[ALL]')
+						.forEach(({ corpus }) => getDataFromDocusky({ target, db, corpus }))
+				} else alert(response.message); // fail
 			},
 
 			error: function(response) {
@@ -125,7 +158,8 @@ class DocuSky {
 				corpus: param.corpus,
 				query: '.all',
 				page: page,
-				pageSize: 200
+				pageSize: 200,
+				requester: REQUESTER,
 			},
 
 			success: function(response) {
